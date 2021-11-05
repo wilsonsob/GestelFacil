@@ -10,10 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_140653) do
+ActiveRecord::Schema.define(version: 2021_11_05_173627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "commissions", force: :cascade do |t|
+    t.text "note"
+    t.boolean "active", default: true
+    t.bigint "contract_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contract_id"], name: "index_commissions_on_contract_id"
+    t.index ["user_id"], name: "index_commissions_on_user_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string "number"
+    t.string "cnpj"
+    t.string "company"
+    t.text "object"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_number"
+    t.string "item_title"
+    t.integer "service_invoice"
+    t.integer "quantity"
+    t.float "price"
+    t.bigint "term_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["term_id"], name: "index_items_on_term_id"
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.string "number"
+    t.date "date_start"
+    t.date "date_end"
+    t.text "description"
+    t.bigint "contract_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contract_id"], name: "index_terms_on_contract_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +70,8 @@ ActiveRecord::Schema.define(version: 2021_11_05_140653) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "commissions", "contracts"
+  add_foreign_key "commissions", "users"
+  add_foreign_key "items", "terms"
+  add_foreign_key "terms", "contracts"
 end
