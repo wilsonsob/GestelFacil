@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+
+puts "destroy done!!!"
+
+User.create(full_name: 'Luanda', email: 'luanda@admin.com', password: '123456', admin: true)
+User.create(full_name: 'Eugenia', email: 'eugenia@admin.com', password: '123456', admin: true)
+User.create(full_name: 'Wilson', email: 'wilson@admin.com', password: '123456', admin: true)
+puts "admins: Eugenia, Luanda e Wilson - done!!!"
+
+User.create(full_name: 'Luanda', email: 'luanda@teste.com', password: '123456', admin: false)
+User.create(full_name: 'Eugenia', email: 'eugenia@teste.com', password: '123456', admin: false)
+User.create(full_name: 'Wilson', email: 'wilson@teste.com', password: '123456', admin: false)
+puts "common profiles: Eugenia, Luanda e Wilson - done!!!"
+
+puts "All seeds completed succesfully!!!"
