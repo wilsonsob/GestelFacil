@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h4>Info about contract</h4>
+  <div class="row">
+    <div class="col-8">
+      <div class="card-body">
+        <h4 class="card-title"><%= @contract.number %></h4>
+          <div class="col-12 col-lg-6">
+            <ul class="list-group list-group-flush ">
+            <li class="list-group-item">Company: <%= @contract.company %></li>
+            <li class="list-group-item">About contract: <%= @contract.object %></li>
+            <li class="list-group-item">Cnpj Contratante: <%= @contract.cnpj_contractor %></li>
+            <li class="list-group-item">Cnpj Contratada <%= @contract.cnpj_hired %></li>
+            </ul>
+            <p class="btn btn-info"><%= link_to 'Back to contracts', contracts_path %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,5 +1,19 @@
-<%= @contracts.each do |contract| %>
-  <%= product.number %>
-  <%= product.company %>
-
-<%= end %>
+<div class="container mt-5 card-board">
+  <h4 class="text-left"><%= "Contracts" %></h4>
+  <div class="row ml-5">
+    <% @contracts.each do |contract| %>
+      <div class="col-md-12 col-lg-6">
+        <div class="card-contract my-4 mr-4">
+          <div class="card-contract-infos">
+              <h5><%= link_to contract.number, contract_path(contract) %></h5>
+              <p id="text-color">Company: <%= contract.company %></p>
+              <p><strong><%= contract.cnpj_contractor  %></strong></p>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="">
+    <p class='btn btn-danger'><%= link_to 'Create a new contract', new_contract_path %></p>
+  </div>
+</div>
