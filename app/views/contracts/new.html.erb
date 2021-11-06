@@ -2,16 +2,11 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="" id="">
-        <h4>Novo contrato</h4>
+        <h5>Novo contrato</h5>
           <div class="m-4">
-            <%= simple_form_for @contract do |f| %>
-              <%= f.input :number, label: 'Número do contrato', placeholder: '012021' %>
-              <%= f.input :object, label: 'Objeto contratual', placeholder: 'Telefonia' %>
-              <%= f.input :company, label: 'Nome da empresa contratada', placeholder: 'Companhia telefônica Ltda' %>
-              <%= f.input :cnpj_contractor, label: 'CNPJ contratante', placeholder: '00000000000000' %>
-              <%= f.input :cnpj_hired, label: 'CNPJ contratada', placeholder: '00000000000000' %>
-              <%= f.button :submit, "Cadastrar contrato", class: "btn-primary" %>
-            <% end %>
+
+            <%= render 'form' %>
+
             <br>
           </div>
       </div>
