@@ -1,1 +1,20 @@
 // Specific CSS for your home-page
+body, html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+.text-block {
+  padding: 20px;
+  position: absolute;
+  box-sizing: content-box;
+  border-radius: 5px;
+  height: auto;
+  width: 250px;
+  top: 60px;
+  right: 40px;
+  background-color: black;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+}
