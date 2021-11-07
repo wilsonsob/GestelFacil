@@ -2,6 +2,7 @@
   justify-content: space-between;
   background: white;
   box-shadow: 0 3px 6px #00000029;
+  color: #1351B4;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -11,4 +12,19 @@
 .navbar-lewagon .navbar-brand img {
   width: 111px;
   height: 40px;
+}
+
+.avatar {
+  width: 35px;
+  border-radius: 25%;
+}
+
+.list-bar {
+  display: inline-block;
+  padding-left: 20px;
+  margin-top: 1em;
+  a {
+    text-decoration: none;
+    color: #1351B4;
+  }
 }
