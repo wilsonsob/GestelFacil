@@ -1,2 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if user_signed_in? %>
+    <h1>Em construção</h1>
+<% else %>
+  <div class="bg-img">
+    <div class="text-block">
+      <h3>Gestel Fácil</h3>
+      <p>Desenvolvido pela Terceira Turma do Coding Bootcamp de
+         Desenvolvimento Web da Enap, em parceria com a Le Wagon, visa facilitar
+         a fiscalização de contratos de telefonia na Administração Pública.</p>
+    </div>
+  </div>
+<% end %>
