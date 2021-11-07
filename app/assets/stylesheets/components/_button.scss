@@ -205,4 +205,20 @@
 
 .br-button-home:hover {
   opacity: 1;
+  background-color: #dbe8fb;
+  color: #1351B4;
+}
+
+.btn-sign {
+  background-color: #1351B4;
+  color: white;
+  padding: 7px;
+  border-radius: 25px;
+}
+
+.btn-sign:hover {
+  text-decoration: none;
+  background-color: #dbe8fb;
+  color: #1351B4;
+
 }
