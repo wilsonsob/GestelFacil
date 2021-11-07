@@ -3,12 +3,11 @@
 
     <div class="form-inputs container">
       <h1>Gestel Fácil</h1>
-
-      <%= f.input :email,
+      <%= f.input :email, label: "E-mail",
                   required: false,
                   autofocus: true,
                   input_html: { autocomplete: "email" } %>
-      <%= f.input :password,
+      <%= f.input :password, label: "Senha",
                   required: false,
                   input_html: { autocomplete: "current-password" } %>
       <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
