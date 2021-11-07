@@ -13,7 +13,7 @@ before_action :set_contract, only: %i[new create]
     if @commission.save!
       redirect_to @contract, notice: 'Fiscal vinculado com sucesso.'
     else
-      :new
+      render :new
     end
   end
 
