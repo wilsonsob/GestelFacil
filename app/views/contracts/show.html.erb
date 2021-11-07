@@ -26,19 +26,11 @@
               <ul>
               <%# Vincular fiscais ao contrato atual  %>
               <% if current_user.admin? %>
-                <%= simple_form_for [@contract, @commission] do |f| %>
-                      <div class="form-inputs">
-                        <br>
-                        <%= f.input :user_id, label: 'Vincular fiscal',
-                                    collection: @users.map{|user| [user.full_name, user.id]},
-                                    input_html:{class:"select2", style:"width: 45vh"} %>
-                        <%= button_tag type: 'submit', class: "button-postfix" do %>
-                        <i class="fas fa-user-plus"></i>
-                        <% end %>
-                      </div>
-                  <% end %>
+                                         
+                <%= render 'shared/form_commission' %>
+                                         
               <% end %>
-            </ul>
+              </ul>
           </div>
         </div>
         <%# Alternativas de navegacao %>
