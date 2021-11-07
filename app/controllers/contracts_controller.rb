@@ -6,6 +6,9 @@ before_action :find, only: [:show]
   end
 
   def show
+    @commission = Commission.create
+    @commissions = Commission.all
+    @users = User.all
   end
 
   def new
