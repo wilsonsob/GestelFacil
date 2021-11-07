@@ -9,6 +9,8 @@ before_action :find, only: [:show]
     # Para exibicao e criacao de commissions
     @commission = Commission.create
     @commissions = Commission.where(contract_id: @contract.id)
+    @term = Term.create
+    @terms = Term.where(contract_id: @contract.id)
     @users = User.all
   end
 
