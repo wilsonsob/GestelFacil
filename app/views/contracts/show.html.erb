@@ -5,35 +5,43 @@
       <div class="card-body">
         <div class="col-12 col-lg-6">
             <ul class="list-group list-group-flush ">
+            <%# Exibicao de dados do contrato %>
             <li class="list-group-item"><strong><%= "Contrato n. #{@contract.number}" %></strong></li>
             <li class="list-group-item">Empresa contratada: <%= @contract.company %></li>
             <li class="list-group-item">Objeto: <%= @contract.object %></li>
             <li class="list-group-item">CNPJ Contratante: <%= @contract.cnpj_contractor %></li>
             <li class="list-group-item">CNPJ Contratada: <%= @contract.cnpj_hired %></li>
+            <%# Comissao de fiscalizacao do respectivo contrato %>
             <li class="list-group-item">Comissão de fiscalização:
               <ul>
-                <% commission_contract = @commissions.select do |commission| %>
-                  <% if commission.present? %>
+              <% if @commissions.present? %>
+                <% @commissions.select do |commission| %>
                     <li><%= "#{commission.user.full_name} - #{commission.contract.number}" %></li></li>
-                  <% end %>
                 <% end %>
+              <% else %>
+                <p><em> Não informado. </em></p>
+              <% end %>
               </ul>
               </ul>
               <ul>
-              <%= simple_form_for [@contract, @commission] do |f| %>
-                    <div class="form-inputs">
-                      <br>
-                      <%= f.input :user_id, label: 'Vincular fiscal',
-                                  collection: @users.map{|user| [user.full_name, user.id]},
-                                  input_html:{class:"select2", style:"width: 45vh"} %>
-                      <%= button_tag type: 'submit', class: "button-postfix" do %>
-                      <i class="fas fa-user-plus"></i>
-                      <% end %>
-                    </div>
-                <% end %>
+              <%# Vincular fiscais ao contrato atual  %>
+              <% if current_user.admin? %>
+                <%= simple_form_for [@contract, @commission] do |f| %>
+                      <div class="form-inputs">
+                        <br>
+                        <%= f.input :user_id, label: 'Vincular fiscal',
+                                    collection: @users.map{|user| [user.full_name, user.id]},
+                                    input_html:{class:"select2", style:"width: 45vh"} %>
+                        <%= button_tag type: 'submit', class: "button-postfix" do %>
+                        <i class="fas fa-user-plus"></i>
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
             </ul>
           </div>
         </div>
+        <%# Alternativas de navegacao %>
         <p class="btn btn-light"><%= link_to 'Voltar', contracts_path %></p>
       </div>
     </div>
