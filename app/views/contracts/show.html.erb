@@ -26,11 +26,14 @@
               <ul>
               <%# Vincular fiscais ao contrato atual  %>
               <% if current_user.admin? %>
-                                         
+
                 <%= render 'shared/form_commission' %>
-                                         
+
+
               <% end %>
               </ul>
+              <%# <%= vincular term ao contrato %> %>
+              <%= render 'shared/form_term' %>
           </div>
         </div>
         <%# Alternativas de navegacao %>
