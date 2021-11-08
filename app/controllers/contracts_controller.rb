@@ -9,13 +9,14 @@ before_action :find, only: [:show, :edit, :update]
     # Para exibicao e criacao de commissions
     @commission = Commission.create
     @commissions = Commission.where(contract_id: @contract.id)
-    @term = Term.create
     @terms = Term.where(contract_id: @contract.id)
     @users = User.all
   end
 
   def new
     @contract = Contract.new
+    @term = Term.create
+
   end
 
   def create
@@ -28,11 +29,12 @@ before_action :find, only: [:show, :edit, :update]
   end
 
   def edit
+
   end
 
   def update
     if @contract.update(contract_params)
-    redirect_to @contract, notice: 'O contrato foi atualizado com sucesso.'
+      redirect_to @contract, notice: 'O contrato foi atualizado com sucesso.'
     else
       render :edit
     end
