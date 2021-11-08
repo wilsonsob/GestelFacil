@@ -18,7 +18,9 @@
                 <% @terms.select do |term| %>
                     <li><%= "#{term.number}: #{term.date_start.strftime("%d/%m/%Y")}
                      - #{term.date_end.strftime("%d/%m/%Y")} |"%>
+                     <%=  %>
                      <%=  link_to 'Editar vigência', edit_term_path(term)%>
+                     <%= link_to 'Cadastrar itens/serviços', new_term_item_path(term) %>
                     </li>
               </li>
                 <% end %>
@@ -43,6 +45,7 @@
                   <%= render 'shared/form_commission' %>
                   <p class="btn btn-light"><%= link_to 'Editar contrato', edit_contract_path %></p>
                   <p class="btn btn-light"><%= link_to 'Cadastrar nova vigência', new_contract_term_path(@contract) %></p>
+                  <p class="btn btn-light"><%# link_to 'Cadastrar itens/serviços', new_term_item_path(@term) %></p>
                 <% end %>
               </ul>
             </div>
