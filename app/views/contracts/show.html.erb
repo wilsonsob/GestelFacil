@@ -14,13 +14,18 @@
             <%# Vigencias %>
               <li class="list-group-item">Vigência:
             <ul>
-              <% if @terms.present? %>
-                <% @terms.select do |term| %>
+              <% if @contract.terms.present? %>
+                <% @contract.terms.each do |term| %>
                     <li><%= "#{term.number}: #{term.date_start.strftime("%d/%m/%Y")}
-                     - #{term.date_end.strftime("%d/%m/%Y")} |"%>
-                     <%=  %>
-                     <%=  link_to 'Editar vigência', edit_term_path(term)%>
-                     <%= link_to 'Cadastrar itens/serviços', new_term_item_path(term) %>
+                     - #{term.date_end.strftime("%d/%m/%Y")}"%>
+                    <%# Exibir itens de cada vigencia %>
+                      <% term.items.each do |item| %>
+                        <ul>
+                        <%= "Item n.#{item.item_number} - #{item.item_title} - R$ #{item.price}" %>
+                      <% end %>
+                      <p><%=  link_to 'Editar vigência', edit_term_path(term)%> |
+                      <%= link_to 'Cadastrar itens/serviços', new_term_item_path(term) %></p>
+                      </ul>
                     </li>
               </li>
                 <% end %>
@@ -31,8 +36,8 @@
             <%# Comissao de fiscalizacao do respectivo contrato %>
               <li class="list-group-item">Comissão de fiscalização:
             <ul>
-              <% if @commissions.present? %>
-                <% @commissions.select do |commission| %>
+              <% if @contract.commissions.present? %>
+                <% @contract.commissions.select do |commission| %>
                     <li><%= "#{commission.user.full_name} - #{commission.contract.number}" %></li></li>
                 <% end %>
               <% else %>
