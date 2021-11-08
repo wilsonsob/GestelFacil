@@ -1,9 +1,9 @@
 
 <%= simple_form_for @contract do |f| %>
-  <%= f.input :number, label: 'Número do contrato', placeholder: '012021' %>
-  <%= f.input :object, label: 'Objeto contratual', placeholder: 'Telefonia' %>
-  <%= f.input :company, label: 'Nome da empresa contratada', placeholder: 'Companhia telefônica Ltda' %>
-  <%= f.input :cnpj_contractor, label: 'CNPJ contratante', placeholder: '00000000000000' %>
-  <%= f.input :cnpj_hired, label: 'CNPJ contratada', placeholder: '00000000000000' %>
-  <%= f.button :submit, "Cadastrar contrato", class: "br-button-home" %>
+  <%= f.input :number, label: 'Número do contrato', placeholder: 'Ex.: 012021' %>
+  <%= f.input :object, label: 'Objeto contratual', placeholder: 'Ex.: Telefonia fixa' %>
+  <%= f.input :company, label: 'Nome da empresa contratada', placeholder: 'Ex.: Companhia telefônica Ltda' %>
+  <%= f.input :cnpj_contractor, label: 'CNPJ contratante', placeholder: 'Ex.: 00000000000000' %>
+  <%= f.input :cnpj_hired, label: 'CNPJ contratada', placeholder: 'Ex.: 00000000000000' %>
+  <%= f.button :submit, "Salvar", class: "br-button-home" %>
 <% end %>

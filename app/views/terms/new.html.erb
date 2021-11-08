@@ -1,1 +1,19 @@
-<%= render 'shared/form_term' %>
+<div class="container-md mt-5">
+  <div class="row">
+    <div class="col-8">
+      <h4><strong>Cadastrar nova vigência</strong></h4>
+        <div class="form m-5">
+          <%= render 'shared/form_term' %>
+        </div>
+          <hr>
+
+          <div class="btn btn-info mr-5">
+            <%= link_to "Voltar para contrato #{@contract.number}", @contract %>
+          </div>
+          <div class="btn btn-light">
+            <%= link_to 'Todos os contratos', contracts_path %>
+          </div>
+
+    </div>
+  </div>
+</div>
