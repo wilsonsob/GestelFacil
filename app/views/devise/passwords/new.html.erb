@@ -1,18 +1,25 @@
-<h2>Forgot your password?</h2>
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-center">
+  <div class="card text-white bg-light mb-3" style="width: 21rem">
+    <div class="card-header" style="color:#1351B4;"><h2>Esqueceu a senha?</h2></div>
+      <div class="card-body">
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= f.error_notification %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+          <div class="form-inputs" style="color:#1351B4;">
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" } %>
+          </div>
+          <div class="d-flex form-actions flex-column" >
+            <%= f.button :submit, "Envie-me as instruções de reset", class: "br-button-home" %>
+            <a href="/users/sign_in" type="submit" style="font-size:14px; color:#1351B4">Entrar</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
