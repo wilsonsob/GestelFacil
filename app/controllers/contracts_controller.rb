@@ -15,8 +15,6 @@ before_action :find, only: [:show, :edit, :update]
 
   def new
     @contract = Contract.new
-    @term = Term.create
-
   end
 
   def create
@@ -29,7 +27,6 @@ before_action :find, only: [:show, :edit, :update]
   end
 
   def edit
-
   end
 
   def update

@@ -1,8 +1,18 @@
-<h1>Edição de contrato</h1>
+<div class="container-md mt-5">
+  <div class="row">
+    <div class="col-8">
+      <h4><strong>Edição de contrato</strong></h4>
+        <div class="form m-5">
+          <%= render 'shared/form', contract: @contract %>
+        </div>
+          <hr>
 
-<%= render 'shared/form', contract: @contract %>
-
-<hr>
-
-<%= link_to 'Detalhes do contrato', @contract %>
-<%= link_to 'Voltar', contracts_path %>
+          <div class="btn btn-info mr-5">
+            <%= link_to 'Detalhes do contrato', @contract %>
+          </div>
+          <div class="btn btn-light">
+            <%= link_to 'Voltar', contracts_path %>
+          </div>
+    </div>
+  </div>
+</div>

@@ -41,7 +41,7 @@
                 <% if current_user.admin? %>
                   <%= render 'shared/form_commission' %>
                   <p class="btn btn-light"><%= link_to 'Editar contrato', edit_contract_path %></p>
-                  <%# <p class="btn btn-light"><%= link_to 'Cadastrar nova vigência', new_contract_term_path %></p> %>
+                  <p class="btn btn-light"><%= link_to 'Cadastrar nova vigência', new_contract_term_path(@contract) %></p>
                 <% end %>
               </ul>
             </div>
