@@ -7,11 +7,14 @@ before_action :find, only: [:show, :edit, :update]
 
   def show
     # Para exibicao e criacao de commissions
-    @commission = Commission.create
-    @commissions = Commission.where(contract_id: @contract.id)
+    @commission = Commission.new
+    # @commissions = Commission.where(contract_id: @contract.id)
     @users = User.all
-    @terms = Term.where(contract_id: @contract.id)
+    # @terms = Term.where(contract_id: @contract.id)
+    # term > items > each de item na show
+
     # @items = Item.where(term_id: @term.id)
+    # @items = Item.first
   end
 
   def new
