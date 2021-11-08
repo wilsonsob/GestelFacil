@@ -1,5 +1,5 @@
 class TermsController < ApplicationController
-before_action :set_contract, only: %i[new create]
+before_action :set_contract, only: %i[new create edit]
 
   def new
     @terms = Term.new
@@ -13,6 +13,9 @@ before_action :set_contract, only: %i[new create]
     else
       render :new
     end
+  end
+
+  def edit
   end
 
   private
