@@ -45,3 +45,12 @@ input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
+
+.container-form {
+  position: relative;
+  padding: 16px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px #00000033;;
+  margin: 2em 2em 2em 20em;
+}

@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-6">
             <ul class="list-group list-group-flush ">
             <%# Exibicao de dados do contrato %>
-            <li class="list-group-item"><strong><%= "Contrato n. #{@contract.number}" %></strong></li>
+            <li class="list-group-item"><strong><%= "Contrato N°: #{@contract.number}" %></strong></li>
             <li class="list-group-item">Empresa contratada: <%= @contract.company %></li>
             <li class="list-group-item">Objeto: <%= @contract.object %></li>
             <li class="list-group-item">CNPJ Contratante: <%= @contract.cnpj_contractor %></li>
@@ -26,13 +26,14 @@
               <ul>
               <%# Vincular fiscais ao contrato atual  %>
               <% if current_user.admin? %>
+              <p class="btn btn-light"><%= link_to 'Editar contrato', edit_contract_path %></p>
 
                 <%= render 'shared/form_commission' %>
 
 
               <% end %>
               </ul>
-              <%# <%= vincular term ao contrato %> %>
+              <%# <%= vincular term ao contrato %>
               <%= render 'shared/form_term' %>
           </div>
         </div>

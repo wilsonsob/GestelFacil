@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-before_action :find, only: [:show]
+before_action :find, only: [:show, :edit, :update]
 
   def index
     @contracts = Contract.all
@@ -24,6 +24,17 @@ before_action :find, only: [:show]
       redirect_to @contract, notice: 'Novo contrato cadastrado com sucesso.'
     else
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @contract.update(contract_params)
+    redirect_to @contract, notice: 'O contrato foi atualizado com sucesso.'
+    else
+      render :edit
     end
   end
 
