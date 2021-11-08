@@ -27,10 +27,7 @@
               <%# Vincular fiscais ao contrato atual  %>
               <% if current_user.admin? %>
               <p class="btn btn-light"><%= link_to 'Editar contrato', edit_contract_path %></p>
-
-                <%= render 'shared/form_commission' %>
-
-
+                  <%= render 'shared/form_commission' %>
               <% end %>
               </ul>
               <%# <%= vincular term ao contrato %>
