@@ -17,7 +17,8 @@
               <% if @terms.present? %>
                 <% @terms.select do |term| %>
                     <li><%= "#{term.number}: #{term.date_start.strftime("%d/%m/%Y")}
-                     - #{term.date_end.strftime("%d/%m/%Y")}" %>
+                     - #{term.date_end.strftime("%d/%m/%Y")} |"%>
+                     <%=  link_to 'Editar vigência', edit_term_path(term)%>
                     </li>
               </li>
                 <% end %>
