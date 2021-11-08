@@ -1,5 +1,10 @@
 <% if user_signed_in? %>
     <h1>Em construção</h1>
+    <br>
+    <hr>
+    <%= link_to 'Ver contratos', contracts_path %>
+    <br>
+    <%= link_to 'Novo contrato', new_contract_path %>
 <% else %>
   <div class="bg-img">
     <div class="text-block">

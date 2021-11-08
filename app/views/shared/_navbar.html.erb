@@ -36,14 +36,14 @@
           <%# <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <%= image_tag "checked_user_blue.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Ação", "#", class: "dropdown-item" %>
-            <%= link_to "Outra Ação", "#", class: "dropdown-item" %>
+            <%= link_to "Página inicial", "/", class: "dropdown-item" %>
+            <%= link_to "Ver contratos", "/contracts", class: "dropdown-item" %>
+            <%= link_to "Novo contrato", "/contracts/new", class: "dropdown-item" %>
             <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
       <% else %>
         <li class="nav-item btn-sign">
-          <%# <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
           <i class="fas fa-user" aria-hidden="true"></i>
           <%= link_to "Entrar", new_user_session_path, class:"btn-sign" %>
         </li>
