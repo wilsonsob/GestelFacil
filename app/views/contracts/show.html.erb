@@ -21,6 +21,9 @@
                           <div class="">
                             <%= link_to "#{term.date_start.strftime("%d/%m/%Y")} - #{term.date_end.strftime("%d/%m/%Y")}", edit_term_path(term) %>
 
+                            <%# Inserir fatura  %>
+                            <%= link_to ' | Inserir fatura', new_term_invoice_path(term) %>
+
 
                         <%# Listar itens de cada vigencia %>
                         <% if term.items.present? %>
@@ -33,6 +36,7 @@
 <% end %>
 <%= link_to '| Cadastrar item (serviço) nesta vigência', new_term_item_path(term) %></li>
                             <ul>
+
 <%# Tabela items %>
                       <div class="card-body">
         <table class="table table-sm">
