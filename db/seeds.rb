@@ -261,12 +261,12 @@ term1 = Term.create!(number: 'Contrato N° 20/SUDENE/2019', date_start: '21/08/2
 
 # puts "Iniciando seed de invoices..."
 
-# csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
+csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
 # csv_options = { col_sep: ';', headers: :first_row }
 
 filepath = 'db/invoice.csv'
 
-CSV.foreach(filepath) do |row|
+CSV.foreach(filepath, csv_options) do |row|
   # Here, row is an array of columns
 
   invoice1 = Invoice.create!(number: row[1],
@@ -274,7 +274,6 @@ CSV.foreach(filepath) do |row|
                               value: row[20],
                               cnpj_contractor: row[2],
                               term_id: term1.id)
-
 end
 
   # puts "#{row[0]} | #{row[1]} | #{row[2]} | #{row[3]} |
