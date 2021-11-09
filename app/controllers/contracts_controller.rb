@@ -1,20 +1,13 @@
 class ContractsController < ApplicationController
-before_action :find, only: [:show, :edit, :update]
+before_action :find, only: %i[show edit update]
 
   def index
     @contracts = Contract.all
   end
 
   def show
-    # Para exibicao e criacao de commissions
     @commission = Commission.new
-    # @commissions = Commission.where(contract_id: @contract.id)
     @users = User.all
-    # @terms = Term.where(contract_id: @contract.id)
-    # term > items > each de item na show
-
-    # @items = Item.where(term_id: @term.id)
-    # @items = Item.first
   end
 
   def new
@@ -24,7 +17,7 @@ before_action :find, only: [:show, :edit, :update]
   def create
     @contract = Contract.new(contract_params)
     if @contract.save
-      redirect_to @contract, notice: 'Novo contrato cadastrado com sucesso.'
+      redirect_to @contract, notice: "Contrato nº #{@contract.number} cadastrado com sucesso."
     else
       render :new
     end
@@ -35,7 +28,7 @@ before_action :find, only: [:show, :edit, :update]
 
   def update
     if @contract.update(contract_params)
-      redirect_to @contract, notice: 'O contrato foi atualizado com sucesso.'
+      redirect_to @contract, notice: "Contrato nº #{@contract.number} atualizado com sucesso."
     else
       render :edit
     end
