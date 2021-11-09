@@ -9,7 +9,7 @@ before_action :set_contract, only: %i[new create]
   def create
     @commission = Commission.new(commission_params)
     @commission.contract_id = @contract.id
-    if @commission.save!
+    if @commission.save
       redirect_to @contract, notice: "Fiscal vinculado com sucesso ao contrato nº #{@contract.number}."
     else
       render :new

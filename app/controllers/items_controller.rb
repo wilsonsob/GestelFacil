@@ -9,7 +9,7 @@ before_action :set_item, only: %i[edit update]
   def create
     @item = Item.new(item_params)
     @item.term_id = @term.id
-    if @item.save!
+    if @item.save
       redirect_to contract_path(@term.contract_id),
         notice: "Item nº #{@item.item_number} vinculado à vigência
          #{@item.term.date_start.strftime("%d/%m/%Y")} - #{@item.term.date_end.strftime("%d/%m/%Y")}."

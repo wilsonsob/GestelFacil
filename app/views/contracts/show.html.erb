@@ -1,62 +1,108 @@
 <div class="container-md mt-4">
-  <h5>Detalhes do contrato</h5>
+  <h5><strong><%= "Detalhes do contrato nº #{@contract.number}" %></strong></h5>
   <div class="row">
     <div class="col-12">
       <div class="card-body">
-        <div class="col-12 col-lg-6">
-            <ul class="list-group list-group-flush ">
-            <%# Exibicao de dados do contrato %>
-              <li class="list-group-item"><strong><%= "Contrato N°: #{@contract.number}" %></strong></li>
-              <li class="list-group-item">Empresa contratada: <%= @contract.company %></li>
-              <li class="list-group-item">Objeto: <%= @contract.object %></li>
-              <li class="list-group-item">CNPJ Contratante: <%= @contract.cnpj_contractor %></li>
-              <li class="list-group-item">CNPJ Contratada: <%= @contract.cnpj_hired %></li>
-            <%# Vigencias %>
-              <li class="list-group-item">Vigência:
-            <ul>
-              <% if @contract.terms.present? %>
-                <% @contract.terms.each do |term| %>
-                    <li><%= "#{term.number}: #{term.date_start.strftime("%d/%m/%Y")}
-                     - #{term.date_end.strftime("%d/%m/%Y")}"%>
-                    <%# Exibir itens de cada vigencia %>
-                      <% term.items.each do |item| %>
-                        <ul>
-                        <%= "Item n.#{item.item_number} - #{item.item_title} - R$ #{item.price}" %>
-                        <%=  link_to 'Editar item | ', edit_item_path(item)%>
-                      <% end %>
-                      <p><%=  link_to 'Editar vigência', edit_term_path(term)%> |
-                      <%= link_to 'Cadastrar itens/serviços', new_term_item_path(term) %></p>
-                      </ul>
-                    </li>
+        <div class="col-10">
+          <ul class="list-group list-group-flush ">
+            <%# Dados contrato %>
+              <li class="list-group-item"><%= "Nº  #{@contract.number}" %>
+                <%= link_to ' | Editar contrato', edit_contract_path if current_user.admin? %></li>
+              <li class="list-group-item"> Contratada: <%= @contract.company %></li>
+              <li class="list-group-item"> Objeto: <%= @contract.object %></li>
+              <li class="list-group-item"> CNPJ: <%= @contract.cnpj_hired %></li>
+              <li class="list-group-item"> Vigência(s):
+                <%# Cadastrar nova vigencia %>
+                  <%= link_to ' | Cadastrar nova vigência', new_contract_term_path(@contract) %>
+                  <div class="m-3">
+                    <% if @contract.terms.present? %>
+                      <%# Listar cada vigencia e link editar vigencia %>
+                        <% @contract.terms.each do |term| %>
+                          <div class="">
+                            <%= link_to "#{term.date_start.strftime("%d/%m/%Y")} - #{term.date_end.strftime("%d/%m/%Y")}", edit_term_path(term) %>
+
+
+                        <%# Listar itens de cada vigencia %>
+                        <% if term.items.present? %>
+
+                                                      <%# Calculo valor total por vigencia %>
+                            <% soma = 0 %>
+                            <% term.items.each do |item| %>
+                              <% total_por_item = (item.quantity * item.price) %>
+<% soma += total_por_item %>
+<% end %>
+<%= link_to '| Cadastrar item (serviço) nesta vigência', new_term_item_path(term) %></li>
+                            <ul>
+<%# Tabela items %>
+                      <div class="card-body">
+        <table class="table table-sm">
+        <thead>
+            <tr>
+              <th class="">Nº</th>
+              <th class="">Item</th>
+              <th class="">Qtd</th>
+              <th class="">Preço</th>
+            </tr>
+        </thead>
+        <tfoot>
+        <tr>
+
+        <td>Total (soma de qtd x preço)</td>
+        <td></td>
+        <td></td>
+        <td><%# "R#{number_to_currency(soma)}" %></td>
+        </tr>
+        </tfoot>
+<% term.items.each do |item| %>
+              <tr>
+                <td class=""><%= link_to "#{item.item_number}", edit_item_path(item) %></td>
+                <td class=""><%= link_to "#{item.item_title.downcase}", edit_item_path(item) %></td>
+                <td class=""><%= item.quantity  %></td>
+                <td class=""><%= "R#{number_to_currency(item.price)}" %></td>
+              </tr>
+<% end %>
+        </table>
+      </div>
+                            <%# --------------%>
+
+
+                            <%# Botao para criar novo item para a vigencia %>
+
+
+
+
+
+                              </ul>
+                          <% else %>
+                              <ul><em> Nenhum item cadastrado. </em>
+                              <%= link_to '| Cadastrar item (serviço) nesta vigência', new_term_item_path(term) %></ul>
+                            <% end %>
+                        </div>
+<% end %>
+                    <% else %>
+                      <p><em> Nenhuma vigência cadastrada. </em></p>
+                    <% end %>
+
+                  </div>
               </li>
+            <%# Lista de fiscais do respectivo contrato %>
+              <li class="list-group-item">Fiscalização:
+                <% if @contract.commissions.present? %>
+                  <% @contract.commissions.each do |commission| %>
+                    <ul><%= "#{commission.user.full_name} - #{commission.contract.number}" %></ul>
+                  <% end %>
+                <% else %>
+                  <ul><em> Não informado. </em></ul>
                 <% end %>
-              <% else %>
-                <p><em> Não informado. </em></p>
-              <% end %>
-            </ul>
-            <%# Comissao de fiscalizacao do respectivo contrato %>
-              <li class="list-group-item">Comissão de fiscalização:
-            <ul>
-              <% if @contract.commissions.present? %>
-                <% @contract.commissions.select do |commission| %>
-                    <li><%= "#{commission.user.full_name} - #{commission.contract.number}" %></li></li>
-                <% end %>
-              <% else %>
-                <p><em> Não informado. </em></p>
-              <% end %>
-            </ul>
-            </ul>
-              <ul>
-                <% if current_user.admin? %>
-                  <%= render 'shared/form_commission' %>
-                  <p class="btn btn-light"><%= link_to 'Editar contrato', edit_contract_path %></p>
-                  <p class="btn btn-light"><%= link_to 'Cadastrar nova vigência', new_contract_term_path(@contract) %></p>
-                  <p class="btn btn-light"><%# link_to 'Cadastrar itens/serviços', new_term_item_path(@term) %></p>
-                <% end %>
-              </ul>
+              </li>
+            <%# Vincular fiscal ao contrato (admin) %>
+              <li class="list-group-item">
+                <%= render 'shared/form_commission' if current_user.admin? %>
+              </li>
+
             </div>
         </div>
-        <%# Alternativas de navegacao %>
+        <%# Alternativas de navegacao no rodape %>
         <p class="btn btn-light"><%= link_to 'Voltar', contracts_path %></p>
       </div>
     </div>
