@@ -1,3 +1,5 @@
+require 'csv'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -256,5 +258,20 @@ term19 = Term.create!(number: 'Termo Aditivo N° 03', date_start: '25/09/2020', 
 term20 = Term.create!(number: 'Termo Aditivo N° 04', date_start: '25/09/2021', date_end: '24/09/2022', description: 'Quinto ano do contrato. Iniciar planejamento para novo processo licitatório.', contract_id: contract10.id)
 
 puts "Terms - done!!!"
+
+# puts "Iniciando seed de invoices..."
+
+# csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
+
+# filepath = 'invoices.csv'
+
+# CSV.foreach(filepath, csv_options) do |row|
+#   # Here, row is an array of columns
+#   #invoice1 = Invoice.create!(number: row[10], )
+
+#   puts "#{row[0]} | #{row[1]} | #{row[2]}"
+# end
+
+# puts "Invoices - done!!!"
 
 puts "All seeds completed succesfully!!!"
