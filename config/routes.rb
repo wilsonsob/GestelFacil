@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   end
   resources :terms, only: %i[edit update] do
     resources :items, only: %i[new create]
+    resources :invoices, only: %i[new create]
   end
   resources :items, only: %i[edit update]
   resources :terms, only: %i[new create]
+  resources :invoices, only: %i[index show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
