@@ -9,7 +9,7 @@ before_action :set_term, only: %i[edit update]
   def create
     @term = Term.new(term_params)
     @term.contract_id = @contract.id
-    if @term.save!
+    if @term.save
       redirect_to @contract, notice: "Vigência #{@term.date_start.strftime("%d/%m/%Y")} -
       #{@term.date_end.strftime("%d/%m/%Y")} adicionada ao contrato nº #{@term.contract.number}."
     else
