@@ -22,6 +22,7 @@
                       <% term.items.each do |item| %>
                         <ul>
                         <%= "Item n.#{item.item_number} - #{item.item_title} - R$ #{item.price}" %>
+                        <%=  link_to 'Editar item | ', edit_item_path(item)%>
                       <% end %>
                       <p><%=  link_to 'Editar vigência', edit_term_path(term)%> |
                       <%= link_to 'Cadastrar itens/serviços', new_term_item_path(term) %></p>

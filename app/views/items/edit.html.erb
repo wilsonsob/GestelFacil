@@ -1,0 +1,16 @@
+<div class="container-md mt-5">
+  <div class="row">
+    <div class="col-8">
+      <h6><strong><%= "Editar item da vigência
+         #{@item.term.date_start.strftime("%d/%m/%Y")} - #{@item.term.date_end.strftime("%d/%m/%Y")}, contrato nº #{@item.term.contract.number}" %></strong></h6>
+        <div class="form m-5">
+          <%= render 'shared/form_item', term: @term, item: @item %>
+        </div>
+          <hr>
+
+          <div class="btn btn-light">
+            <%= link_to 'Voltar', contracts_path %>
+          </div>
+    </div>
+  </div>
+</div>
