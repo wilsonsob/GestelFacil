@@ -1,0 +1,59 @@
+<div class="container-md mt-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-10">
+      <h5 class="text-left"><strong><%= "ANÁLISE DE FATURA" %></strong></h5>
+      <div class="card-body">
+        <!-- Cabecalho -->
+        <table class="table table-hover">
+            <tr>
+              <th class="">Nº fatura</th>
+              <th class="">CNPJ do contratante</th>
+              <th class="">Referência</th>
+            </tr>
+            <% @list_invoice_number.each do |invoice| %>
+              <tr>
+                <td class=""><%= invoice.number  %></td>
+                <td class=""><%= invoice.cnpj_contractor  %></td>
+                <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
+              </tr>
+            <% end %>
+        </table>
+        </div>
+              <h5 class="text-left"><strong><%= "CHECKLIST" %></strong></h5>
+      <div class="card-body">
+      <!-- Checklist -->
+        <table class="table table-hover">
+            <tr>
+
+              <th class="">Item de análise</th>
+
+              <th class="">Resultado</th>
+            </tr>
+            <% @list_invoice_number.each do |invoice| %>
+              <tr>
+
+                <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
+
+
+                <td class="">
+                  <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
+                    <%= "✔" %>
+                  <% else %>
+                    <%= "❌" %>
+                  <% end %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container-md">
+    <div class="row justify-content-end">
+      <div class="col-sm-4">
+      <div class="btn btn-info">
+          <%= link_to "Todos os contratos", contracts_path %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
