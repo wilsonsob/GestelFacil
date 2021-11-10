@@ -1,13 +1,5 @@
 require 'csv'
 
-# # This file should contain all the record creation needed to seed the database with its default values.
-# # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-# #
-# # Examples:
-# #
-# #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-# #   Character.create(name: 'Luke', movie: movies.first)
-
 Result.destroy_all
 Invoice.destroy_all
 Item.destroy_all
@@ -85,7 +77,6 @@ puts "Items - done!!!"
 puts "Iniciando seed de invoices..."
 
 csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
-# csv_options = { col_sep: ';', headers: :first_row }
 
 filepath = 'db/invoice.csv'
 
@@ -99,6 +90,7 @@ CSV.foreach(filepath, csv_options) do |row|
                              term_id: term1.id,
                              service_name: row[19],
                              date_invoice: row[39])
+                             term_id: term1.id)
 end
 
   # puts "#{row[0]} | #{row[1]} | #{row[2]} | #{row[3]} |
@@ -106,4 +98,4 @@ end
 
 puts "Invoices - done!!!"
 
-# puts "All seeds completed succesfully!!!"
+puts "All seeds completed succesfully!!!"
