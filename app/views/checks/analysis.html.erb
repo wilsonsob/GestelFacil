@@ -7,41 +7,40 @@
         <table class="table table-hover">
             <tr>
               <th class="">Nº fatura</th>
-
               <th class="">CNPJ do contratante</th>
               <th class="">Referência</th>
-
             </tr>
             <% @list_invoice_number.each do |invoice| %>
               <tr>
                 <td class=""><%= invoice.number  %></td>
-
                 <td class=""><%= invoice.cnpj_contractor  %></td>
                 <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
-
               </tr>
             <% end %>
         </table>
         </div>
-              <h5 class="text-left"><strong><%= "ANÁLISE --- TESTES" %></strong></h5>
+              <h5 class="text-left"><strong><%= "CHECKLIST" %></strong></h5>
       <div class="card-body">
-
-
       <!-- Checklist -->
         <table class="table table-hover">
             <tr>
 
-              <th class="">Código do serviço</th>
+              <th class="">Item de análise</th>
 
-              <th class="">Valor</th>
+              <th class="">Resultado</th>
             </tr>
-            <% @invoices.each do |invoice| %>
+            <% @list_invoice_number.each do |invoice| %>
               <tr>
 
-                <td class=""><%= invoice.service_code  %></td>
+                <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
 
 
-                <td class=""><%= invoice.value  %></td>
+                <td class="">
+                  <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
+                    <%= "✔" %>
+                  <% else %>
+                    <%= "❌" %>
+                  <% end %></td>
               </tr>
             <% end %>
         </table>
