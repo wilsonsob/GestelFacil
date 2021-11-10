@@ -50,7 +50,7 @@ commision6 = Commission.create!(note: 'Portaria CINDACTA III N° 138/AIAC, de 21
 
 puts "Commissions - done!!!"
 
-term1 = Term.create!(number: '030/BARF - CINDACTA III/2020-2012310', date_start: '30/12/2020', date_end: '29/12/2020', description: 'Primeiro ano do contrato.', contract_id: contract1.id)
+term1 = Term.create!(number: '030/BARF - CINDACTA III/2020-2012310', date_start: '30/12/2020', date_end: '29/12/2021', description: 'Primeiro ano do contrato.', contract_id: contract1.id)
 puts "Terms - done!!!"
 
 item1 = Item.create!(item_number: 41, item_title: 'Assinatura de Linhas Analógicas não residenciais (NRES)',
@@ -89,7 +89,7 @@ CSV.foreach(filepath, csv_options) do |row|
                              cnpj_contractor: row[2],
                              term_id: term1.id,
                              service_name: row[19],
-                             date_invoice: row[39])
+                             date_invoice: row[39],
                              term_id: term1.id)
 end
 
