@@ -77,11 +77,10 @@ puts "Items - done!!!"
 puts "Iniciando seed de invoices..."
 
 csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
-csv_options = { col_sep: ';', headers: :first_row }
 
 filepath = 'db/invoice.csv'
 
-CSV.foreach(filepath) do |row|
+CSV.foreach(filepath, csv_options) do |row|
   # Here, row is an array of columns
 
   invoice1 = Invoice.create!(number: row[1],

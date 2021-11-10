@@ -24,22 +24,19 @@
       <!-- Checklist -->
         <table class="table table-hover">
             <tr>
-
               <th class="">Item de análise</th>
-
               <th class="">Resultado</th>
             </tr>
             <% @list_invoice_number.each do |invoice| %>
               <tr>
-
                 <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
-
-
                 <td class="">
                   <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
                     <%= "✔" %>
                   <% else %>
-                    <%= "❌" %>
+                    <p> CNPJ faturado <strong><%= invoice.cnpj_contractor %></strong> | CNPJ
+                    <%= link_to 'contrato: ', edit_contract_path(invoice.term.contract) if current_user.admin?%>
+                    <strong><%= invoice.term.contract.cnpj_contractor  %></strong> ❌ </p>
                   <% end %></td>
               </tr>
             <% end %>
