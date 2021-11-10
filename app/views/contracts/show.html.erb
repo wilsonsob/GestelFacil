@@ -29,11 +29,11 @@
                         <% if term.items.present? %>
 
                                                       <%# Calculo valor total por vigencia %>
-                            <% soma = 0 %>
+                            <%# soma = 0 %>
                             <% term.items.each do |item| %>
-                              <% total_por_item = (item.quantity * item.price) %>
-<% soma += total_por_item %>
-<% end %>
+                              <%# total_por_item = (item.quantity * item.price) %>
+<%# soma += total_por_item %>
+<%# end %>
 <%= link_to '| Cadastrar item (serviço) nesta vigência', new_term_item_path(term) %></li>
                             <ul>
 
@@ -57,7 +57,7 @@
         <td><%# "R#{number_to_currency(soma)}" %></td>
         </tr>
         </tfoot>
-<% term.items.each do |item| %>
+<%# term.items.each do |item| %>
               <tr>
                 <td class=""><%= link_to "#{item.item_number}", edit_item_path(item) %></td>
                 <td class=""><%= link_to "#{item.item_title.downcase}", edit_item_path(item) %></td>
