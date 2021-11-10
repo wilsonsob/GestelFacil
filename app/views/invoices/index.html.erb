@@ -21,7 +21,7 @@
                 <td class=""><%= invoice.cnpj_contractor  %></td>
                 <td class=""><%= invoice.date_invoice  %></td>
                 <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
-                <td class=""><%= invoice.value  %></td>
+                <td class=""><%= sprintf('%.2f', invoice.value)  %></td>
               </tr>
             <% end %>
         </table>

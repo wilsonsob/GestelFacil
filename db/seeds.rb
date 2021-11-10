@@ -82,16 +82,20 @@ filepath = 'db/invoice.csv'
 
 CSV.foreach(filepath, csv_options) do |row|
   # Here, row is an array of columns
-
+  a = row[20]
+  b = a.partition(',')
+  c = b[0].to_i
+  d = b[2].to_i
+  e = (c.to_s + '.' + d.to_s).to_f
   invoice1 = Invoice.create!(number: row[1],
                              service_code: row[18],
-                             value: row[20],
+                             value: e,
                              cnpj_contractor: row[2],
-                             term_id: term1.id,
                              service_name: row[19],
                              date_invoice: row[39],
                              term_id: term1.id)
 end
+
 
   # puts "#{row[0]} | #{row[1]} | #{row[2]} | #{row[3]} |
   #     #{row[4]} | #{row[5]} | #{row[6]} | #{row[7]}"
