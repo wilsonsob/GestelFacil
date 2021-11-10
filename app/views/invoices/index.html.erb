@@ -7,7 +7,9 @@
             <tr>
               <th class="">Nº fatura</th>
               <th class="">Código do serviço</th>
+              <th class="">Nome do serviço</th>
               <th class="">CNPJ do contratante</th>
+              <th class="">Data da Fatura</th>
               <th class="">Referência</th>
               <th class="">Valor</th>
             </tr>
@@ -15,7 +17,9 @@
               <tr>
                 <td class=""><%= invoice.number  %></td>
                 <td class=""><%= invoice.service_code  %></td>
+                <td class=""><%= invoice.service_name  %></td>
                 <td class=""><%= invoice.cnpj_contractor  %></td>
+                <td class=""><%= invoice.date_invoice  %></td>
                 <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
                 <td class=""><%= invoice.value  %></td>
               </tr>

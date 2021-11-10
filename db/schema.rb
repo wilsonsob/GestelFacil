@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_06_125026) do
+ActiveRecord::Schema.define(version: 2021_11_10_150154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_11_06_125026) do
     t.bigint "term_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "service_name"
+    t.date "date_invoice"
     t.index ["term_id"], name: "index_invoices_on_term_id"
   end
 

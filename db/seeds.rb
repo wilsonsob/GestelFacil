@@ -87,8 +87,10 @@ CSV.foreach(filepath, csv_options) do |row|
                              service_code: row[18],
                              value: row[20],
                              cnpj_contractor: row[2],
+                             term_id: term1.id,
+                             service_name: row[19],
+                             date_invoice: row[39])
                              term_id: term1.id)
-
 end
 
   # puts "#{row[0]} | #{row[1]} | #{row[2]} | #{row[3]} |
