@@ -12,7 +12,7 @@ class ChecksController < ApplicationController
     @invoices = Invoice.all
     @invoices_uniq = @invoices.uniq(&:number)
     @list_invoice_number = []
-        @invoices_uniq.each do |invoice|
+    @invoices_uniq.each do |invoice|
       @list_invoice_number << Invoice.find_by(number: invoice.number)
     end
     @list_invoice_number.sort_by {|i| i.created_at}

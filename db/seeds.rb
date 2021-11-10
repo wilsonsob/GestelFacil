@@ -9,6 +9,10 @@ require 'csv'
 # #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Contract.destroy_all
+Term.destroy_all
+Item.destroy_all
+Invoice.destroy_all
 
 puts "destroy done!!!"
 
@@ -35,7 +39,7 @@ puts "common profiles: Eugenia, Luanda e Wilson - done!!!"
 # # user12 = User.create!(full_name: 'Tiago Batista', email: 'tiago@teste.com', password: '123456', admin: false)
 # # puts "Members of the commission created - done!!!"
 
-contract1 = Contract.create!(number: '20/SUDENE/2019', cnpj_contractor: '09263130000191', cnpj_hired: '40432544000147', company: 'CLARO S.A.',
+contract1 = Contract.create!(number: '20/SUDENE/2019', cnpj_contractor: '00394429009329', cnpj_hired: '40432544000147', company: 'CLARO S.A.',
                              object: "Contratação de empresa prestadora de Sistema Móvel Celular (SMC), na modalidade Local e
                              Longa Distância Nacional (LDN) a serem utilizados pela SUDENE na localidade de Aracaju através de 04
                              (quatro) linhas celulares, pelo período de 12 (doze) meses, podendo ser prorrogado por sucessivos períodos,
