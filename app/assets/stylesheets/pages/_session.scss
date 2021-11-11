@@ -54,3 +54,19 @@ input[type=text]:focus, input[type=password]:focus {
   box-shadow: 0 2px 4px #00000033;;
   margin: 2em 2em 2em 20em;
 }
+
+.cards-profile {
+  box-shadow: 0 2px 4px #00000033;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.fa-check{
+  color: #45AD43;
+  font-size: 20px;
+}
+
+.fa-exclamation-triangle{
+  color: #FABD10;
+  font-size: 20px;
+}
