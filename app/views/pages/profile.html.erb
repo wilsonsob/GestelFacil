@@ -1,4 +1,3 @@
-
 <div class="container-md mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-8">
@@ -19,10 +18,11 @@
           <td>
             <% invoices = term.invoices.uniq(&:number) %>
               <% invoices.each do |invoice| %>
-                <%= link_to "Fatura n. #{invoice.number}", invoices_path %>
+                <p><%= link_to "Fatura n. #{invoice.number}", invoices_path %>
+                <%= " | competência mês  #{invoice.date_invoice.strftime("%m")} |" %>
                   <%= link_to analysis_path do %>
                     <%= " |  Ver análise  " %>
-                    <i class="fab fa-font-awesome-flag"></i>
+                    <i class="fab fa-font-awesome-flag"></i></p>
                   <% end %>
               <% end %>
           </td>
