@@ -1,36 +1,37 @@
-
 <div class="container-md mt-5">
   <div class="row justify-content-center">
     <div class="col-sm-8">
       <h5 class="text-left"><%= "Meus contratos" %></h5>
       <br>
-      <% @invoices_uniq_number.each do |invoice| %>
-        <% @my_commissions.each do |commission| %>
-        <div class="cards-profile mb-5">
+      <% @my_commissions.each do |commission| %>
+
+        <div class="cards-profile mb-4">
 
           <table class="table table-hover">
-          <tr>
-          <th class="">Contrato</th>
-          <th class="">
-            <%= link_to "#{invoice.term.contract.number}", contract_path(commission.contract)%></th>
-          <th class="">
-            <%= commission.contract.company %></th>
-          </tr>
-          <tr>
-          <td class="">  </td>
-          <td class="">detalhamento ds fatura nº
-          <%= link_to "#{invoice.number}", invoices_path %>
 
-          <td class="">
-          <%= link_to analysis_path do %>
-          <p>Análises <i class="fas fa-tasks"></i></p>
-          <% end %>
-          </td>
+          <tr>
+          <td><%= link_to "Contrato n. #{commission.contract.number} | #{commission.contract.company}", contract_path(commission.contract)%>
           </tr>
+
+          <tr>
+          <% commission.contract.terms.each do |term| %>
+          <td>
+            <% invoices = term.invoices.uniq(&:number) %>
+              <% invoices.each do |invoice| %>
+                <p><%= link_to "Fatura n. #{invoice.number}", invoices_path %>
+                <%= " | competência mês  #{invoice.date_invoice.strftime("%m")} |" %>
+                  <%= link_to analysis_path do %>
+                    <%= " |  Ver análise  " %>
+                    <i class="fab fa-font-awesome-flag"></i></p>
+                  <% end %>
+              <% end %>
+          </td>
+          <% end %>
+          </tr>
+
           </table>
 
         </div>
-        <% end %>
       <% end %>
     </div>
   </div>
