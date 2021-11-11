@@ -26,7 +26,6 @@ contract1 = Contract.create!(number: '030/BARF - CINDACTA III/2020-2012310', cnp
                              (seis) linhas diretas analógicas não residenciais (NRES), pelo período de 12 (doze) meses, podendo ser
                              prorrogado por sucessivos períodos, até o limite de 60 (sessenta) meses.")
 
-
 puts "Contracts - done!!!"
 
 # Comissões do COMAER
@@ -71,10 +70,9 @@ item5 = Item.create!(item_number: 49, item_title: 'Chamadas LDN Fixo-Fixo STFC-L
 item6 = Item.create!(item_number: 50, item_title: 'Chamadas LDN Fixo-Móvel STFC-LDN-FM (VC2 e VC3)',
                      service_code: 68335, quantity: 305, price: 0.36, term_id: term1.id)
 
-
 puts "Items - done!!!"
 
-puts "Iniciando seed de invoices..."
+puts "Starting seed to invoices from CSV file..."
 
 csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
 
@@ -85,20 +83,17 @@ CSV.foreach(filepath, csv_options) do |row|
   a = row[20]
   b = a.partition(',')
   c = b[0].to_i
-  d = b[2].to_i
-  e = (c.to_s + '.' + d.to_s).to_f
-  invoice1 = Invoice.create!(number: row[1],
-                             service_code: row[18],
-                             value: e,
-                             cnpj_contractor: row[2],
-                             service_name: row[19],
-                             date_invoice: row[39],
-                             term_id: term1.id)
+  d = b[2]
+  e = (c.to_s + '.' + d).to_f
+
+  Invoice.create!(number: row[1],
+                  service_code: row[18],
+                  value: e,
+                  cnpj_contractor: row[2],
+                  service_name: row[19],
+                  date_invoice: row[39],
+                  term_id: term1.id)
 end
-
-
-  # puts "#{row[0]} | #{row[1]} | #{row[2]} | #{row[3]} |
-  #     #{row[4]} | #{row[5]} | #{row[6]} | #{row[7]}"
 
 puts "Invoices - done!!!"
 
