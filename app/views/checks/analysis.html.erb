@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <!-- Cabecalho -->
       <div class="card-body">
-        <% @invoices_uniq_number.each do |invoice| %>
+        <% @invoices_uniq_cnpj.each do |invoice| %>
           <% @my_commissions.each do |commission| %>
             <table class="table table-hover">
                 <tr>
@@ -35,7 +35,7 @@
             <th class="">ITEM DE ANÁLISE</th>
             <th class="text-center">RESULTADO</th>
           </tr>
-          <% @invoices_uniq_number.each do |invoice| %>
+          <% @invoices_uniq_cnpj.each do |invoice| %>
             <!-- Itens de analise -->
             <!-- 1 -->
             <tr>
