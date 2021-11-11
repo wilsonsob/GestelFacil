@@ -1,55 +1,93 @@
 <div class="container-md mt-5">
   <div class="row justify-content-center">
-    <div class="col-sm-10">
-      <h5 class="text-left"><strong><%= "ANÁLISE DE FATURA" %></strong></h5>
+    <div class="col-sm-12">
+      <!-- Cabecalho -->
       <div class="card-body">
-        <!-- Cabecalho -->
-        <table class="table table-hover">
-            <tr>
-              <th class="">Nº fatura</th>
-              <th class="">CNPJ do contratante</th>
-              <th class="">Referência</th>
-            </tr>
-            <% @list_invoice_number.each do |invoice| %>
-              <tr>
-                <td class=""><%= invoice.number  %></td>
-                <td class=""><%= invoice.cnpj_contractor  %></td>
-                <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
-              </tr>
-            <% end %>
-        </table>
+        <% @invoices_uniq_number.each do |invoice| %>
+          <% @my_commissions.each do |commission| %>
+            <table class="table table-hover">
+                <tr>
+                  <td class="text-center"><strong>RELATÓRIO DE ANÁLISE DE DETALHAMENTO DE FATURA</strong></td>
+                </tr>
+                <tr>
+                  <td class=""> Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
+                </tr>
+                <tr>
+                  <td class="">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
+                </tr>
+                <tr>
+                  <td class="">Fatura nº <strong><%= link_to "#{invoice.number}", invoices_path %></strong></td>
+                </tr>
+                <tr>
+                  <td class="">Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(commission.contract) %></strong> </td>
+                </tr>
+                <tr>
+                  <td class=""></td>
+                </tr>
+            </table>
+          <% end %>
+        <% end %>
         </div>
-              <h5 class="text-left"><strong><%= "CHECKLIST" %></strong></h5>
-      <div class="card-body">
       <!-- Checklist -->
+      <div class="card-body">
         <table class="table table-hover">
+          <tr>
+            <th class="">ITEM DE ANÁLISE</th>
+            <th class="text-center">RESULTADO</th>
+          </tr>
+          <% @invoices_uniq_number.each do |invoice| %>
+            <!-- Itens de analise -->
+            <!-- 1 -->
             <tr>
-              <th class="">Item de análise</th>
-              <th class="">Resultado</th>
+              <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
+              <td class="text-center">
+                <ul>
+                <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                <% else %>
+                <i class="fas fa-exclamation-triangle"></i>
+                  <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
+                  <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
+                <% end %>
+                </ul>
+              </td>
             </tr>
-            <% @list_invoice_number.each do |invoice| %>
-              <tr>
-                <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
-                <td class="">
-                  <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
-                    <%= "✔" %>
-                  <% else %>
-                    <p> CNPJ faturado <strong><%= invoice.cnpj_contractor %></strong> | CNPJ
-                    <%= link_to 'contrato: ', edit_contract_path(invoice.term.contract) if current_user.admin?%>
-                    <strong><%= invoice.term.contract.cnpj_contractor  %></strong> ❌ </p>
-                  <% end %></td>
-              </tr>
-            <% end %>
+            <!-- 2 -->
+            <tr>
+              <td class="">O período de prestação de serviços está coberto pela vigência contratual? </td>
+              <td class="text-center">
+                <ul>
+                <% if invoice.date_invoice > invoice.term.date_start && invoice.date_invoice < invoice.term.date_end %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                <% else %>
+                <i class="fas fa-exclamation-triangle"></i>
+                  <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
+                  <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+            <!-- 3 -->
+            <tr>
+              <td class=""> Conferência de serviço de preço fixo: <%=  %> </td>
+              <td class="text-center">
+                <ul>
+                <% if invoice.blank?  %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                <% else %>
+                <i class="fas fa-exclamation-triangle"></i>
+                  <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
+                  <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
         </table>
+      <!-- Opcoes de navegacao ao fim da pagina -->
       </div>
-    </div>
-  </div>
-  <div class="container-md">
-    <div class="row justify-content-end">
-      <div class="col-sm-4">
-      <div class="btn btn-info">
-          <%= link_to "Todos os contratos", contracts_path %>
-      </div>
+        <div class="card-body">
+        <p class="btn btn-light"><%= link_to 'Meus contratos', profile_path%></p>
       </div>
     </div>
   </div>
