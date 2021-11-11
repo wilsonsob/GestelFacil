@@ -5,8 +5,8 @@
       <div class="card-body">
         <% @my_commissions.each do |commission| %>
           <% commission.contract.terms.each do |term| %>
-            <% invoices = term.invoices.uniq(&:number)%>
-              <% invoices.each do |invoice| %>
+            <% invoices_uniq_number = term.invoices.uniq(&:number)%>
+              <% invoices_uniq_number.each do |invoice| %>
 
                 <table class="table table-sm">
                     <tr>
@@ -45,10 +45,10 @@
                 <ul>
                 <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
                   <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                <% else %>
-                <i class="fas fa-exclamation-triangle"></i>
-                  <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
-                  <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
+                  <% else %>
+                  <i class="fas fa-exclamation-triangle"></i>
+                    <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
+                    <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
                 <% end %>
                 </ul>
               </td>
@@ -60,31 +60,42 @@
                 <ul>
                 <% if invoice.date_invoice > invoice.term.date_start && invoice.date_invoice < invoice.term.date_end %>
                   <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                <% else %>
-                <i class="fas fa-exclamation-triangle"></i>
-                  <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
-                  <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
+                  <% else %>
+                  <i class="fas fa-exclamation-triangle"></i>
+                    <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
+                    <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
                 <% end %>
                 </ul>
               </td>
             </tr>
-            <!-- 3 -->
-            <tr>
-              <td class=""> Conferência de serviço de preço fixo: <%=  %> </td>
-              <td class="text-center">
-                <ul>
-                <% if invoice.blank?  %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                <% else %>
-                <i class="fas fa-exclamation-triangle"></i>
-                  <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
-                  <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
+            <!-- # -->
           <% end %>
-        </table>
+            <%# @invoices_uniq_service = Invoice.all.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
+            <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
+            <% invoices_code_10538 = invoices_uniq_service.select{ |invoice| invoice.service_code == 10538} %>
+            <%# invoices_uniq_service.each do |invoices| %>
+              <!-- 3 -->
+              <tr>
+                <td class=""> Conferência de serviço de preço fixo: <%=  %> </td>
+                <td class="text-center">
+                  <ul>
+                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
+                  <% invoices_code_10538.each do |invoice| %>
+
+                    <% if invoice.value == item_41.price  %>
+                      <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                    <% else %>
+                    <i class="fas fa-exclamation-triangle"></i>
+                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
+                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
+                    <% end %>
+                    <% end %>
+                  </ul>
+                </td>
+              </tr>
+            <%# end %>
+          </table>
+        <%# end %>
       <% end %>
     <% end %>
       <!-- Opcoes de navegacao ao fim da pagina -->
