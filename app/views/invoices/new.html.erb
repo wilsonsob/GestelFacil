@@ -1,0 +1,8 @@
+<%# <%= form.file_field :attachments, multiple: true, direct_upload: true %>
+<%# <input type=file data-direct-upload-url="<%= rails_direct_uploads_url %>" /> %>
+
+<%= simple_form_for([@term, @invoice]) do |f| %>
+<%= f.input :file, as: :file %>
+ <%= f.submit "Import" %>
+
+ <% end %>
