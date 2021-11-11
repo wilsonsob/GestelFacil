@@ -3,32 +3,31 @@
     <%= image_tag "https://www.gov.br/++theme++padrao_govbr/img/govbr-logo-large.png" %>
   <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <%# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> %>
+  <% if user_signed_in? %>
+  <div>
+        <ul >
+          <li class="list-bar">
+            <%= link_to "Página inicial", "/" %>
+          </li>
+          <li class="list-bar">
+            <%= link_to 'Meus contratos', profile_path %>
+          </li>
+          <li class="list-bar">
+            <%= link_to 'Faturas', invoices_path %>
+          </li>
+          <li class="list-bar">
+            <%= link_to 'Análises', analysis_path %>
+          </li>
+        </ul>
+      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-  <div >
+      <ul class="navbar-nav mr-auto">
 
-      <ul >
-        <li class="list-bar">
-          <a href="https://www.gov.br/pt-br/orgaos-do-governo" target="_blank">Órgãos do Governo</a>
-        </li>
-        <li class="list-bar">
-          <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank">Acesso à Informação</a>
-        </li>
-        <li class="list-bar">
-          <a href="http://www4.planalto.gov.br/legislacao" target="_blank">Legislação</a>
-        </li>
-        <li class="list-bar">
-          <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-digital" target="_blank">Acessibilidade</a>
-        </li>
-      </ul>
 
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
         <li class="nav-item active mr-3" style="display:flex; align-items:center;">
           <%= "Saudações, #{current_user.full_name}!" %>
         </li>
@@ -44,12 +43,28 @@
             <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
-      <% else %>
-        <li class="nav-item btn-sign">
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <%= link_to "Entrar", new_user_session_path, class:"btn-sign" %>
+      </ul>
+    </div>
+  <% else %>
+    <div>
+      <ul >
+        <li class="list-bar">
+          <a href="https://www.gov.br/pt-br/orgaos-do-governo" target="_blank">Órgãos do Governo</a>
         </li>
-      <% end %>
-    </ul>
-  </div>
+        <li class="list-bar">
+          <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank">Acesso à Informação</a>
+        </li>
+        <li class="list-bar">
+          <a href="http://www4.planalto.gov.br/legislacao" target="_blank">Legislação</a>
+        </li>
+        <li class="list-bar">
+          <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-digital" target="_blank">Acessibilidade</a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-item btn-sign">
+      <i class="fas fa-user" aria-hidden="true"></i>
+      <%= link_to "Entrar", new_user_session_path, class:"btn-sign" %>
+    </div>
+  <% end %>
 </div>
