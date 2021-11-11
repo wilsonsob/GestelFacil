@@ -1,33 +1,35 @@
-<div class="container-md mt-5">
+<div class="container-md mt-4">
   <div class="row justify-content-center">
     <div class="col-sm-12">
       <!-- Cabecalho -->
       <div class="card-body">
-        <% @invoices_uniq_number.each do |invoice| %>
-          <% @my_commissions.each do |commission| %>
-            <table class="table table-hover">
-                <tr>
-                  <td class="text-center"><strong>RELATÓRIO DE ANÁLISE DE DETALHAMENTO DE FATURA</strong></td>
-                </tr>
-                <tr>
-                  <td class=""> Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
-                </tr>
-                <tr>
-                  <td class="">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
-                </tr>
-                <tr>
-                  <td class="">Fatura nº <strong><%= link_to "#{invoice.number}", invoices_path %></strong></td>
-                </tr>
-                <tr>
-                  <td class="">Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(commission.contract) %></strong> </td>
-                </tr>
-                <tr>
-                  <td class=""></td>
-                </tr>
-            </table>
-          <% end %>
-        <% end %>
-        </div>
+        <% @my_commissions.each do |commission| %>
+          <% commission.contract.terms.each do |term| %>
+            <% invoices = term.invoices.uniq(&:number)%>
+              <% invoices.each do |invoice| %>
+
+                <table class="table table-sm">
+                    <tr>
+                      <td class="text-center"><strong>RELATÓRIO DE ANÁLISE DE DETALHAMENTO DE FATURA</strong></td>
+                    </tr>
+
+                    <tr>
+                      <td class=""> Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
+                    </tr>
+                    <tr>
+                      <td class="">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
+                    </tr>
+                    <tr>
+                      <td class="">Fatura nº <strong><%= link_to "#{invoice.number} | competência mês  #{invoice.date_invoice.strftime("%m")}", invoices_path %></strong></td>
+                    </tr>
+                    <tr>
+                      <td class="">Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(invoice.term.contract) %></strong> </td>
+                    </tr>
+                    <tr>
+                      <td class=""></td>
+                    </tr>
+                </table>
+      </div>
       <!-- Checklist -->
       <div class="card-body">
         <table class="table table-hover">
@@ -35,7 +37,6 @@
             <th class="">ITEM DE ANÁLISE</th>
             <th class="text-center">RESULTADO</th>
           </tr>
-          <% @invoices_uniq_number.each do |invoice| %>
             <!-- Itens de analise -->
             <!-- 1 -->
             <tr>
@@ -84,6 +85,8 @@
             </tr>
           <% end %>
         </table>
+      <% end %>
+    <% end %>
       <!-- Opcoes de navegacao ao fim da pagina -->
       </div>
         <div class="card-body">
