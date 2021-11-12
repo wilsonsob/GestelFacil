@@ -3,13 +3,16 @@
     <%= image_tag "https://www.gov.br/++theme++padrao_govbr/img/govbr-logo-large.png" %>
   <% end %>
   <% if user_signed_in? %>
+    <li class="list-bar">
+      <h3><i class="fas fa-phone-square-alt"></i><b>Gestel Fácil</b></h3>
+    </li>
     <div>
       <ul >
         <li class="list-bar">
-          <i class="fas fa-phone-square-alt"></i><%= link_to "Gestel Fácil", "/" %>
+          <%= link_to "Página Inicial", "/" %>
         </li>
         <li class="list-bar">
-          <%= link_to 'Meus contratos', profile_path %>
+          <%= link_to 'Contratos', contracts_path %>
         </li>
         <li class="list-bar">
           <%= link_to 'Faturas', invoices_path %>
