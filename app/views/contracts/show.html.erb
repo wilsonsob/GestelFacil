@@ -30,12 +30,12 @@
 
                                                       <%# Calculo valor total por vigencia %>
                             <%# soma = 0 %>
-                            <% term.items.each do |item| %>
+
                               <%# total_por_item = (item.quantity * item.price) %>
 <%# soma += total_por_item %>
 <%# end %>
 <%= link_to '| Cadastrar item (serviço) nesta vigência', new_term_item_path(term) %></li>
-                            <ul>
+
 
 <%# Tabela items %>
                       <div class="card-body">
@@ -49,9 +49,10 @@
             </tr>
         </thead>
         <tfoot>
+        <ul><% term.items.each do |item| %>
         <tr>
 
-        <td>Total (soma de qtd x preço)</td>
+        <%#<td>Total (soma de qtd x preço)</td>%>
         <td></td>
         <td></td>
         <td><%# "R#{number_to_currency(soma)}" %></td>
@@ -93,7 +94,7 @@
               <li class="list-group-item">Fiscalização:
                 <% if @contract.commissions.present? %>
                   <% @contract.commissions.each do |commission| %>
-                    <ul><%= "#{commission.user.full_name} - #{commission.contract.number}" %></ul>
+                    <ul><%= "#{commission.user.full_name}" %></ul>
                   <% end %>
                 <% else %>
                   <ul><em> Não informado. </em></ul>

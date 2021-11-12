@@ -222,3 +222,19 @@
   color: #1351B4;
 
 }
+
+.btn-custom {
+  background-color: #1351B4;
+  color: white;
+  padding: 7px;
+  border-radius: 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+  .btn-custom:hover {
+    text-decoration: none;
+    background-color: #dbe8fb;
+    color: #1351B4;
+  }
+
