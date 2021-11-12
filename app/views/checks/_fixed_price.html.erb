@@ -1,0 +1,61 @@
+<!-- Contexto: invoices_uniq_service -->
+        <% @my_commissions.each do |commission| %>
+          <% commission.contract.terms.each do |term| %>
+            <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
+              <!-- Contexto específico -->
+              <% invoices_code_10538 = invoices_uniq_service.select{ |invoice| invoice.service_code == 10538} %>
+
+<!-- Check -->
+              <tr class="line">
+                <td class="item">5) Conferência de serviço de preço fixo:
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+              <tr class="line-subitem">
+                <td class="subitem"> 5.1) Identificação do serviço:
+                 <% item_41 = term.items.find{ |item| item.item_number == 41} %>
+                    <% invoices_code_10538.each do |invoice| %>
+                      <%= invoice.service_name.downcase %>
+                      <% item_10538 = invoice.term.items.find_by(service_code: 10538) %>
+                </td>
+                <td class="result text-center">
+                    <% if item_10538  %>
+                      <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                    <% else %>
+                    <i class="fas fa-exclamation-triangle"></i>
+                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
+                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
+                    <% end %>
+                </td>
+              </tr>
+                <td class="subitem"> 5.2) Avaliação da qtd de lançamentos na fatura:
+                  <p text-color-blue><%= " ENCONTRADO: fatura = #{invoices_code_10538.count} | limite contratual mensal = #{item_10538.quantity}" %></p>
+                </td>
+                <td class="result text-center">
+                    <% if item_10538.quantity > invoices_code_10538.count   %>
+                      <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                    <% else %>
+                    <i class="fas fa-exclamation-triangle"></i>
+                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
+                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
+                    <% end %>
+                </td>
+              </tr>
+              <tr class="line-subitem">
+                <td class="subitem"> 5.2) Avaliação da qtd de lançamentos na fatura:
+                <p class="text-color-blue">ENCONTRADO: contrato (c): <%= item_41.price %>  | fatura (f): <%= invoice.value %>
+                | diferença: (c - f) = R$ <%= sprintf('%5.2f',item_41.price-invoice.value)  %></p>
+                </td>
+                <td class="result text-center">
+                    <% if invoice.value == item_41.price  %>
+                      <i class="fas fa-check"></i>
+                    <% else %>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+<!-- Contexto -->
+        <% end %>
+      <% end %>

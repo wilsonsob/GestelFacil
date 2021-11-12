@@ -1,168 +1,55 @@
 <div class="container-md mt-4">
   <div class="row justify-content-center">
-    <div class="col-sm-12">
-      <!-- Cabecalho -->
+    <div class="col-sm-10">
       <div class="card-body">
-        <% @my_commissions.each do |commission| %>
-          <% commission.contract.terms.each do |term| %>
-            <% invoices_uniq_number = term.invoices.uniq(&:number)%>
-              <% invoices_uniq_number.each do |invoice| %>
+        <!-- Cabecalho -->
+        <%= render 'header_report' %>
 
-                <table class="table table-sm">
-                    <tr>
-                      <td class="text-center"><strong>RELATÓRIO DE ANÁLISE DE DETALHAMENTO DE FATURA</strong></td>
-                    </tr>
-
-                    <tr>
-                      <td class=""> Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
-                    </tr>
-                    <tr>
-                      <td class="">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
-                    </tr>
-                    <tr>
-                      <td class="">Fatura nº <strong><%= link_to "#{invoice.number} | competência mês  #{invoice.date_invoice.strftime("%m")}", invoices_path %></strong></td>
-                    </tr>
-                    <tr>
-                      <td class="">Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(invoice.term.contract) %></strong> </td>
-                    </tr>
-                    <tr>
-                      <td class=""></td>
-                    </tr>
-                </table>
-      </div>
-      <!-- Checklist -->
-      <div class="card-body">
-        <table class="table table-hover">
-          <tr>
-            <th class="">ITEM DE ANÁLISE</th>
-            <th class="text-center">RESULTADO</th>
-          </tr>
-            <!-- Itens de analise -->
-            <!-- 1 -->
-            <tr>
-              <td class="">1) O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
-              <td class="text-center">
-                <ul>
-                <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                  <% else %>
-                  <i class="fas fa-exclamation-triangle"></i>
-                    <li style="list-style-type: none"> Fatura: <%= invoice.cnpj_contractor %></li>
-                    <li style="list-style-type: none"> Contrato: <%= invoice.term.contract.cnpj_contractor  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
-            <!-- 2 -->
-            <tr>
-              <td class="">2) O período de prestação de serviços está coberto pela vigência contratual? </td>
-              <td class="text-center">
-                <ul>
-                <% if invoice.date_invoice > invoice.term.date_start && invoice.date_invoice < invoice.term.date_end %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                  <% else %>
-                  <i class="fas fa-exclamation-triangle"></i>
-                    <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
-                    <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
-            <!-- # -->
-            <!-- 3 -->
-          <% end %>
-          <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
-            <tr>
-              <td class="">3) Os serviços localizados na fatura correspondem aos serviços contratados e vigentes? <p></p>
-              <% invoices_uniq_service.each do |invoice| %>
-                <strong><%= "#{invoice.service_code}"%></strong>
-                <%=" - #{invoice.service_name}" %><% end %></td>
-              <td class="text-center">
-                <ul>
-                <% if  %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                  <% else %>
-                  <i class="fas fa-exclamation-triangle"></i>
-                    <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
-                    <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
-              <!-- 4 -->
-                        <tr>
-              <td class="">4) Busca de palavras pré-definidas no campo de descrição de servicos: <p></p>
-              multa, encargos, juros, atraso
-              <% invoices_uniq_service.each do |invoice| %>
-                <strong><%= "#{}"%></strong>
-                <%=" #{}" %><% end %></td>
-              <td class="text-center">
-                <ul>
-                <% if false %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                  <% else %>
-                  <i class="fas fa-exclamation-triangle"></i>
-                    <li style="list-style-type: none"> Fatura: <%=  %></li>
-                    <li style="list-style-type: none"> Contrato: <%= "#{}  #{}"  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
-              <!-- 5 -->
-            <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
-            <% invoices_code_10538 = invoices_uniq_service.select{ |invoice| invoice.service_code == 10538} %>
-            <%# invoices_uniq_service.each do |invoices| %>
-              <!-- 5 -->
-              <tr>
-                <td class="">5) Conferência de serviço de preço fixo (pré-definido):
-                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
-                    <% invoices_code_10538.each do |invoice| %>
-                      <strong><%= invoice.service_name.downcase %></strong>
-                      <% item_10538 = invoice.term.items.find_by(service_code: 10538) %> <p></p>
-                      <%= "Quantidade de lançamentos na fatura: #{invoices_code_10538.count} | limite contratual mensal: #{item_10538.quantity}" %>
-                </td>
-                <td class="text-center">
-                  <ul>
-                    <% if invoice.value == item_41.price  %>
-                      <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                    <% else %>
-                    <i class="fas fa-exclamation-triangle"></i>
-                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
-                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
-                    <% end %>
-                    <% end %>
-                  </ul>
-                </td>
-              </tr>
-              <!-- 6 -->
-                        <tr>
-              <td class="">6) Valor total da fatura X valor mensal estimado <p></p>
-
-              <% invoices_uniq_service.each do |invoice| %>
-                <strong><%= "#{}"%></strong>
-                <%=" #{}" %><% end %></td>
-              <td class="text-center">
-                <ul>
-                <% if false %>
-                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
-                  <% else %>
-                  <i class="fas fa-exclamation-triangle"></i>
-                    <li style="list-style-type: none"> Fatura: <%=  %></li>
-                    <li style="list-style-type: none"> Contrato: <%= "#{}  #{}"  %></li>
-                <% end %>
-                </ul>
-              </td>
-            </tr>
-            <%# end %>
-          </table>
-        <%# end %>
-      <% end %>
-    <% end %>
-      <!-- Opcoes de navegacao ao fim da pagina -->
-      </div>
+        <!-- Checklist -->
         <div class="card-body">
-        <p class="btn btn-light"><%= link_to 'Meus contratos', profile_path%></p>
+          <table class="table table-hover">
+            <tr class="line-header">
+              <th class="item-header">ITENS DA CONFERÊNCIA AUTOMÁTICA</th>
+              <th class="result-reader text-center">RESULTADO</th>
+            </tr>
+          <!-- 1 -->
+          <%= render 'cnpj' %>
+
+          <!-- 2 -->
+          <%= render 'competence' %>
+
+          <!-- 3 -->
+          <%= render 'services' %>
+
+          <!-- 4 -->
+          <%= render 'key_words' %>
+
+          <!-- 5 -->
+          <%= render 'fixed_price' %>
+          <td></td>
+          <td></td>
+          <tr></tr>
+
+          </table>
+        </div>
       </div>
+    </div>
+    </table>
+    <br>
+    <br>
+
+    </div>
+</div>
+<div class="container-md mt-4">
+  <div class="row justify-content-center">
+    <div class="col-sm-2">
+      <div class="card">
+      <div class="btn btn-info">
+        <%= link_to 'Gerar pdf', root_path %>
+
+      </div>
+      </div>
+          <br>    <br>    <br>
     </div>
   </div>
 </div>

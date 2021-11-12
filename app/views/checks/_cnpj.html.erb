@@ -1,0 +1,21 @@
+<!-- Contexto: invoices_uniq_number -->
+        <% @my_commissions.each do |commission| %>
+          <% commission.contract.terms.each do |term| %>
+            <% invoices_uniq_number = term.invoices.uniq(&:number)%>
+              <% invoices_uniq_number.each do |invoice| %>
+<!-- Check -->
+                <tr class="line">
+                  <td class="item">1) A fatura foi emitida em favor do CNPJ do órgão contratante?</td>
+                  <td class="result text-center">
+                    <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
+                      <i class="fas fa-check"></i>
+                      <% else %>
+                      <i class="fas fa-exclamation-triangle"></i>
+                      Fatura: <%= invoice.cnpj_contractor %>
+                      Contrato: <%= invoice.term.contract.cnpj_contractor  %>
+                    <% end %></td>
+                </tr>
+<!-- Contexto -->
+    <% end %>
+  <% end %>
+<% end %>
