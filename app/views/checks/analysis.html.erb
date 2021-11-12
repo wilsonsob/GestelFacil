@@ -40,7 +40,7 @@
             <!-- Itens de analise -->
             <!-- 1 -->
             <tr>
-              <td class="">O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
+              <td class="">1) O CNPJ constante na fatura corresponde ao CNPJ do contratante?</td>
               <td class="text-center">
                 <ul>
                 <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
@@ -55,7 +55,7 @@
             </tr>
             <!-- 2 -->
             <tr>
-              <td class="">O período de prestação de serviços está coberto pela vigência contratual? </td>
+              <td class="">2) O período de prestação de serviços está coberto pela vigência contratual? </td>
               <td class="text-center">
                 <ul>
                 <% if invoice.date_invoice > invoice.term.date_start && invoice.date_invoice < invoice.term.date_end %>
@@ -69,19 +69,60 @@
               </td>
             </tr>
             <!-- # -->
+            <!-- 3 -->
           <% end %>
-            <%# @invoices_uniq_service = Invoice.all.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
+          <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
+            <tr>
+              <td class="">3) Os serviços localizados na fatura correspondem aos serviços contratados e vigentes? <p></p>
+              <% invoices_uniq_service.each do |invoice| %>
+                <strong><%= "#{invoice.service_code}"%></strong>
+                <%=" - #{invoice.service_name}" %><% end %></td>
+              <td class="text-center">
+                <ul>
+                <% if  %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                  <% else %>
+                  <i class="fas fa-exclamation-triangle"></i>
+                    <li style="list-style-type: none"> Fatura: <%= invoice.date_invoice %></li>
+                    <li style="list-style-type: none"> Contrato: <%= "#{invoice.term.date_start} - #{invoice.term.date_end}"  %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+              <!-- 4 -->
+                        <tr>
+              <td class="">4) Busca de palavras pré-definidas no campo de descrição de servicos: <p></p>
+              multa, encargos, juros, atraso
+              <% invoices_uniq_service.each do |invoice| %>
+                <strong><%= "#{}"%></strong>
+                <%=" #{}" %><% end %></td>
+              <td class="text-center">
+                <ul>
+                <% if false %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                  <% else %>
+                  <i class="fas fa-exclamation-triangle"></i>
+                    <li style="list-style-type: none"> Fatura: <%=  %></li>
+                    <li style="list-style-type: none"> Contrato: <%= "#{}  #{}"  %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
+              <!-- 5 -->
             <% invoices_uniq_service = term.invoices.uniq{ |invoice| [invoice.number, invoice.service_code] }  %>
             <% invoices_code_10538 = invoices_uniq_service.select{ |invoice| invoice.service_code == 10538} %>
             <%# invoices_uniq_service.each do |invoices| %>
-              <!-- 3 -->
+              <!-- 5 -->
               <tr>
-                <td class=""> Conferência de serviço de preço fixo: <%=  %> </td>
+                <td class="">5) Conferência de serviço de preço fixo (pré-definido):
+                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
+                    <% invoices_code_10538.each do |invoice| %>
+                      <strong><%= invoice.service_name.downcase %></strong>
+                      <% item_10538 = invoice.term.items.find_by(service_code: 10538) %> <p></p>
+                      <%= "Quantidade de lançamentos na fatura: #{invoices_code_10538.count} | limite contratual mensal: #{item_10538.quantity}" %>
+                </td>
                 <td class="text-center">
                   <ul>
-                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
-                  <% invoices_code_10538.each do |invoice| %>
-
                     <% if invoice.value == item_41.price  %>
                       <li style="list-style-type: none"><i class="fas fa-check"></i></li>
                     <% else %>
@@ -93,6 +134,25 @@
                   </ul>
                 </td>
               </tr>
+              <!-- 6 -->
+                        <tr>
+              <td class="">6) Valor total da fatura X valor mensal estimado <p></p>
+
+              <% invoices_uniq_service.each do |invoice| %>
+                <strong><%= "#{}"%></strong>
+                <%=" #{}" %><% end %></td>
+              <td class="text-center">
+                <ul>
+                <% if false %>
+                  <li style="list-style-type: none"><i class="fas fa-check"></i></li>
+                  <% else %>
+                  <i class="fas fa-exclamation-triangle"></i>
+                    <li style="list-style-type: none"> Fatura: <%=  %></li>
+                    <li style="list-style-type: none"> Contrato: <%= "#{}  #{}"  %></li>
+                <% end %>
+                </ul>
+              </td>
+            </tr>
             <%# end %>
           </table>
         <%# end %>
