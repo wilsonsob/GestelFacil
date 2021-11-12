@@ -9,8 +9,7 @@ before_action :set_term, only: %i[new create]
     @invoice = Invoice.new(invoice_params)
     @invoice.term_id = @term.id
     if @invoice.save
-      redirect_to contract_path(@invoice.term.contract_id),
-        notice: 'Fatura salva'
+      redirect_to invoices_path, notice: 'Fatura salva'
     else
       render :new
     end
@@ -28,7 +27,7 @@ before_action :set_term, only: %i[new create]
   private
 
   def invoice_params
-    params.require(:invoice).permit(:number, :service_code, :value, :cnpj_contractor)
+    params.require(:invoice).permit(:number, :service_code, :value, :cnpj_contractor, :file)
   end
 
   def set_term
