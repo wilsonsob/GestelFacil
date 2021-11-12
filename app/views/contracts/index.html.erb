@@ -3,15 +3,15 @@
     <div class="col-sm-10">
       <h5 class="text-left"><strong><%= "Todos os contratos" %></strong></h5>
       <div class="card-body">
-        <table class="table table-hover">
+        <table class="table table-hover" style="background-color:white; box-shadow:0 2px 4px #00000033; font-size:14px;">
             <tr>
-              <th class="">Nº</th>
+              <th class="">Nº do contrato</th>
               <th class="">Objeto</th>
               <th class="">Contratada</th>
             </tr>
             <% @contracts.each do |contract| %>
               <tr>
-                <td class=""><%= link_to "Nº #{contract.number}", contract_path(contract)  %></td>
+                <td class=""><%= link_to "#{contract.number}", contract_path(contract)  %></td>
                 <td class=""><%= contract.object  %></td>
                 <td class=""><%= contract.company  %></td>
               </tr>
