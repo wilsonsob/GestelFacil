@@ -33,7 +33,8 @@ gem 'devise'
 # gem 'prawn-rails'
 
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem "wkhtmltopdf-binary", group: :development
+gem "wkhtmltopdf-heroku", group: :production
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
