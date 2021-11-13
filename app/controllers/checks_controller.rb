@@ -11,7 +11,7 @@ class ChecksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name", template: 'checks/analysis.html.erb'  # Excluding ".pdf" extension.
+        render pdf: "file_name", template: 'checks/analysis.html.erb' # Excluding ".pdf" extension.
 
     # Lista de faturas de numero exclusivo:
      end
