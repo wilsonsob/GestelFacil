@@ -225,9 +225,10 @@
 
 .btn-custom {
   background-color: #1351B4;
-  color: white;
+  color: #f8f8f8;
   padding: 7px;
-  border-radius: 25px;
+  border: none;
+  border-radius: 5px;
   text-align: center;
   text-decoration: none;
 }
@@ -237,4 +238,3 @@
     background-color: #dbe8fb;
     color: #1351B4;
   }
-

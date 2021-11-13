@@ -1,11 +1,17 @@
 <%= simple_form_for [@contract, @commission] do |f| %>
-<div class="form-inputs">
-  <br>
-  <%= f.input :user_id, label: 'Vincular fiscal',
-              collection: @users.map{|user| [user.full_name, user.id]},
-              input_html:{class:"select2", style:"width: 45vh"} %>
-  <%= button_tag type: 'submit', class: "button-postfix" do %>
-  <i class="fas fa-user-plus"></i>
-  <% end %>
-</div>
+  <div class="form-inputs">
+    <br>
+    <div class="container-sm d-flex align-items-center">
+      <div class="p-2 flex-fill bd-highlight">
+        <%= f.input :user_id, label: 'Vincular novo fiscal',
+                    collection: @users.map{|user| [user.full_name, user.id]},
+                    input_html:{class:"select2", style:"width: 40vh"} %>
+      </div>
+      <div class="p-2">
+        <%= button_tag type: 'submit', class: "button-postfix" do %>
+        <i class="fas fa-user-plus"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

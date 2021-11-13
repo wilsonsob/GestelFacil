@@ -9,8 +9,8 @@
         <div class="card-body">
           <table class="table table-hover">
             <tr class="line-header">
-              <th class="item-header">ITENS DA CONFERÊNCIA AUTOMÁTICA</th>
-              <th class="result-reader text-center">RESULTADO</th>
+              <th class="item-header" style="padding-left:25px;"><p></p><h6><strong>Itens conferência automática</strong></h6></th>
+              <th class="result-reader text-center" style="padding-right:25px;"><p></p><h6><strong>Resultado</strong></h6></th>
             </tr>
           <!-- 1 -->
           <%= render 'cnpj' %>
@@ -26,9 +26,8 @@
 
           <!-- 5 -->
           <%= render 'fixed_price' %>
-          <td></td>
-          <td></td>
-          <tr></tr>
+
+
 
           </table>
         </div>
@@ -37,19 +36,15 @@
     </table>
     <br>
     <br>
-
     </div>
 </div>
 <div class="container-md mt-4">
   <div class="row justify-content-center">
     <div class="col-sm-2">
       <div class="card">
-
         <%= link_to 'Exportar relatório', root_path, class:"btn-custom" %>
-
-
       </div>
-          <br>    <br>    <br>
+        <br><br>
     </div>
   </div>
 </div>

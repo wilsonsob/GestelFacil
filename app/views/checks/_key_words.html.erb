@@ -5,12 +5,12 @@
               <% invoices_uniq_number.each do |invoice| %>
 <!-- Check -->
             <tr class="line">
-              <td class="item">4) Checagem da inexistência de palavras pré-definidas no campo de descrição dos serviços faturados:</td>
+              <td class="item" style="padding-left:25px;">4) Checagem da inexistência de palavras pré-definidas no campo de descrição dos serviços faturados:</td>
               <td></td>
             </tr>
             <tr class="line-subitem">
-              <td class="subitem"> 4.1) multa, mul</td>
-              <td class="result text-center">
+              <td class="subitem" style="padding-left:40px;"> 4.1) multa, mul</td>
+              <td class="result text-center" style="padding-left:25px;">
                 <% if invoice.service_name.downcase.include? "multa" or invoice.service_name.downcase.include? "mul" %>
                   <i class="fas fa-exclamation-triangle"></i>
                   <% else %>
@@ -19,8 +19,8 @@
               </td>
             </tr>
             <tr class="line-subitem">
-              <td class="subitem"> 4.2) encargo, enc </td>
-              <td class="result text-center">
+              <td class="subitem" style="padding-left:40px;"> 4.2) encargo, enc </td>
+              <td class="result text-center" style="padding-left:25px;">
                 <% if invoice.service_name.downcase.include? "encargo" or invoice.service_name.downcase.include? "enc" %>
                   <i class="fas fa-exclamation-triangle"></i>
                   <% else %>
@@ -29,8 +29,8 @@
               </td>
             </tr>
             <tr class="line-subitem">
-              <td class="subitem"> 4.3) juros, jur </td>
-              <td class="result text-center">
+              <td class="subitem" style="padding-left:40px;"> 4.3) juros, jur </td>
+              <td class="result text-center" style="padding-left:25px;">
                 <% if invoice.service_name.downcase.include? "juros" or invoice.service_name.downcase.include? "jur" %>
                   <i class="fas fa-exclamation-triangle"></i>
                   <% else %>
