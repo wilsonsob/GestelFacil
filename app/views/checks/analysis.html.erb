@@ -42,7 +42,12 @@
   <div class="row justify-content-center">
     <div class="col-sm-2">
       <div class="card">
-        <%= link_to 'Exportar relatório', root_path, class:"btn-custom" %>
+
+
+
+        <%= link_to 'Exportar relatório', analysis_path(format: :pdf), class:"btn-custom" %>
+
+
       </div>
         <br><br>
     </div>
