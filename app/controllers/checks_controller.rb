@@ -2,18 +2,16 @@ class ChecksController < ApplicationController
 
   def analysis
     # Lista de faturas de numero exclusivo:
-    @invoices_uniq_number = Invoice.all.uniq(&:number)
-    # @invoices_uniq_number.count = qtd de faturas
-    # @invoices_uniq_number.class => array
 
-    # Lista de faturas de cnpj (do contratante) exclusivo
+    @invoices_uniq_number = Invoice.all.uniq(&:number)
     @invoices_uniq_cnpj = Invoice.all.uniq{ |invoice| [invoice.number, invoice.cnpj_contractor] }
 
     # Para analises relativas ao current_user
     @user = current_user
     @my_commissions = Commission.where(user_id: @user)
 
-    
+  end
+end
 
 
 
@@ -22,17 +20,6 @@ class ChecksController < ApplicationController
     # Invoice.find_by(number: invoice.number, service_code: invoice.cnpj_contractor)
     # @invoices_uniq_cnpj = @list_invoice_number.sort_by {|i| i.created_at}
 
-
-
-
-
-
-
-
-
-
-
-  end
 
   # def list_invoice_number
   #   @invoices = Invoice.all
@@ -54,5 +41,3 @@ class ChecksController < ApplicationController
   #   end
   #   @list_by_service_code.sort_by {|i| i.created_at}
   # end
-
-end
