@@ -1,10 +1,9 @@
 <div class="show-contract">
-  <div class="container-md mt-5">
-    <h5><%= "Detalhes do contrato nº #{@contract.number}" %></h5>
+  <div class="container-md mt-4">
     <div class="row">
       <div class="col-12">
         <div class="card-body">
-          <div class="col-10">
+          <div class="col-10"><h5><%= "Detalhes do contrato nº #{@contract.number}" %></h5><br><br>
             <ul class="list-group list-group-flush ">
               <%# Cabecalho dados contrato %>
               <li class="list-group-item"> <strong> <%= "Nº  #{@contract.number}" %> </strong>
@@ -22,7 +21,7 @@
                       <div class="">
                         <strong><i class="far fa-calendar-alt"></i><%="  #{term.date_start.strftime("%d/%m/%Y")} - #{term.date_end.strftime("%d/%m/%Y")}" %></strong>
                         <%= link_to ' | editar vigência', edit_term_path(term) %>
-                        <%= link_to '| cadastrar item nesta vigência | ', new_term_item_path(term) %>
+                        <%= link_to '| cadastrar item | ', new_term_item_path(term) %>
                         <%# Inserir fatura  %>
                         <%= link_to new_term_invoice_path(term) do %>
                           <%= "carregar arquivo fatura" %>
@@ -93,8 +92,8 @@
                   </div>
                   <br><br>
                       <div class="col-sm-2">
-                        <div class="card">
-                          <%= link_to 'Meus contratos', profile_path, class:"btn-custom" %>
+                        <div class="">
+                          <%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %>
                         </div>
                         <br><br><br>
                       </div>

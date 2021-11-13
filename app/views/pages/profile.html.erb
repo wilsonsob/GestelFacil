@@ -1,23 +1,19 @@
 <div class="profile-page">
   <div class="container-md mt-5">
     <div class="row justify-content-center">
-      <h5 class="text-left"><%= "Meus contratos" %></h5>
-      <div class="col-sm-7">
+      <div class="col-8">
+        <h5 ><%= "Meus contratos" %></h5>
         <br>
         <% @my_commissions.each do |commission| %>
-
-          <div class="cards-profile mt-4">
-
+          <div class="cards-profile mt-3">
             <table class="table table-hover">
             <td class="profile-ct">
             <ul class="profile-ct-ul">
-
             <%= link_to contract_path(commission.contract) do %>
               <%="  Contrato n. #{commission.contract.number} | #{commission.contract.company} " %>
               <i class="fas fa-handshake"></i></ul>
             <% end %>
             </td>
-
             <tr>
               <% commission.contract.terms.each do |term| %>
               <td class="profile-ft">
@@ -28,7 +24,6 @@
                       <%= "Fatura n. #{invoice.number}" %>
                       <i class="fas fa-file-alt"></i>
                     <% end %>
-
                     <%= " (competência mês  #{invoice.date_invoice.strftime("%m")}) |" %>
                       <%= link_to analysis_path do %>
                         <%= "análise automática" %>
@@ -38,9 +33,7 @@
               <% end %></ul>
             </td>
             </tr>
-
             </table>
-
           </div>
         <% end %>
       </div>
