@@ -1,14 +1,21 @@
 class ChecksController < ApplicationController
 
   def analysis
-    # Lista de faturas de numero exclusivo:
-
     @invoices_uniq_number = Invoice.all.uniq(&:number)
     @invoices_uniq_cnpj = Invoice.all.uniq{ |invoice| [invoice.number, invoice.cnpj_contractor] }
 
     # Para analises relativas ao current_user
     @user = current_user
     @my_commissions = Commission.where(user_id: @user)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name", template: 'checks/analysis.html.erb'  # Excluding ".pdf" extension.
+
+    # Lista de faturas de numero exclusivo:
+     end
+    end
 
   end
 end

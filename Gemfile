@@ -30,7 +30,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
 
-gem 'prawn-rails'
+# gem 'prawn-rails'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
