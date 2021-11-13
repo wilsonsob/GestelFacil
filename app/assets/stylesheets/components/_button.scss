@@ -228,9 +228,10 @@
   color: #f8f8f8;
   padding: 7px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
   text-decoration: none;
+  width: 50%;
 }
 
   .btn-custom:hover {
@@ -238,3 +239,12 @@
     background-color: #dbe8fb;
     color: #1351B4;
   }
+.btn-custom-light{
+  background-color: none;
+  color: #1351B4;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
