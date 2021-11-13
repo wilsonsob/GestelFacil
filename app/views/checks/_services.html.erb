@@ -5,14 +5,15 @@
 
 <!-- Check -->
                 <tr>
-                  <td class="">3) Os serviços localizados na fatura correspondem aos serviços contratados e vigentes?<p></p>
+                  <td style="padding-left:25px;">3) Os serviços localizados na fatura correspondem aos serviços contratados e vigentes?<p></p>
 <!-- Contexto -->
-                    ENCONTRADO: <% invoices_uniq_service.each do |invoice| %>
+                    <span style="color:#1351B4";>ENCONTRADO:
+                     <% invoices_uniq_service.each do |invoice| %>
                       <strong><%= "#{invoice.service_code}"%></strong>
                       <%=" - #{invoice.service_name}" %>
-                    <% end %>
+                    <% end %></span>
                   </td>
-                    <td class="text-center">
+                    <td class="text-center" style="padding-left:25px;">
                       <% if  %>
                         <i class="fas fa-check"></i>
                         <% else %>

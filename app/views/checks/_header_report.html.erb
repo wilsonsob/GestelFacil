@@ -6,25 +6,23 @@
 
                 <table class="table table-sm">
                     <tr>
-                      <td class="text-center"><p></p><strong>Relatório de análise automatizada do detalhamento da fatura</strong><p></p></td>
+                      <td class="text-center"><p></p><h6><strong>Relatório da análise automatizada do faturamento</strong></h6><p></p></td>
                     </tr>
 
                     <tr>
-                      <td class=""> Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
+                      <td style="padding-left:25px;">Sistema Gestel Fácil, data de emissão: <strong><%= Date.today.strftime("%d/%m/%Y") %></strong></td>
                     </tr>
                     <tr>
-                      <td class="">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
+                      <td style="padding-left:25px;">Membro da equipe de fiscalização do contrato: <strong><%= @user.full_name %></strong></td>
                     </tr>
                     <tr>
-                      <td class="">Fatura nº <strong><%= link_to "#{invoice.number} | competência mês  #{invoice.date_invoice.strftime("%m")}", invoices_path %></strong></td>
+                      <td style="padding-left:25px;">Fatura nº <strong><%= link_to "#{invoice.number} | competência mês  #{invoice.date_invoice.strftime("%m")}", invoices_path %></strong></td>
                     </tr>
                     <tr>
-                      <td class="">Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(invoice.term.contract) %></strong> </td>
+                      <td style="padding-left:25px;"> <p> Contrato nº <strong><%= link_to "#{invoice.term.contract.number}", contract_path(invoice.term.contract) %></strong></p> </td>
                     </tr>
-                    <tr>
-                      <td class=""></td>
-                    </tr>
-                
+
+
               <% end %>
             <% end %>
           <% end %>

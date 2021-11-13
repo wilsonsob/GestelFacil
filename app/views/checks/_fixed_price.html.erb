@@ -7,44 +7,43 @@
 
 <!-- Check -->
               <tr class="line">
-                <td class="item">5) Conferência de serviço de preço fixo:
+                <td class="item" style="padding-left:25px;">5) Conferência de serviço de preço fixo:
                 </td>
                 <td></td>
               </tr>
-              <tr>
+
               <tr class="line-subitem">
-                <td class="subitem"> 5.1) Identificação do serviço:
+                <td class="subitem" style="padding-left:40px;"> 5.1) Identificação do serviço:
                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
                     <% invoices_code_10538.each do |invoice| %>
-                      <%= invoice.service_name.downcase %>
+                      <p style="padding-left:25px;color:#1351B4;"> ENCONTRADO: <%= invoice.service_name.downcase %></p>
                       <% item_10538 = invoice.term.items.find_by(service_code: 10538) %>
                 </td>
-                <td class="result text-center">
+
+                <td class="result text-center" style="padding-left:25px;">
                     <% if item_10538  %>
                       <li style="list-style-type: none"><i class="fas fa-check"></i></li>
                     <% else %>
                     <i class="fas fa-exclamation-triangle"></i>
-                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
-                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
                     <% end %>
                 </td>
+
               </tr>
-                <td class="subitem"> 5.2) Avaliação da qtd de lançamentos na fatura:
-                  <p text-color-blue><%= " ENCONTRADO: fatura = #{invoices_code_10538.count} | limite contratual mensal = #{item_10538.quantity}" %></p>
+              <tr class="line-subitem" >
+                <td class="subitem" style="padding-left:40px;"> 5.2) Avaliação da qtd de lançamentos na fatura:
+                  <p style="padding-left:25px;color:#1351B4;"><%= " ENCONTRADO: fatura = #{invoices_code_10538.count} | limite contratual mensal = #{item_10538.quantity}" %></p>
                 </td>
-                <td class="result text-center">
+                <td class="result text-center" style="padding-left:25px;">
                     <% if item_10538.quantity > invoices_code_10538.count   %>
                       <li style="list-style-type: none"><i class="fas fa-check"></i></li>
                     <% else %>
                     <i class="fas fa-exclamation-triangle"></i>
-                      <li style="list-style-type: none"> Fatura: <%= invoice.value %></li>
-                      <li style="list-style-type: none"> Contrato: <%= item_41.price  %></li>
                     <% end %>
                 </td>
               </tr>
-              <tr class="line-subitem">
-                <td class="subitem"> 5.3) Conferência do valor cobrado:
-                <p class="text-color-blue">ENCONTRADO: contrato (c): <%= item_41.price %>  | fatura (f): <%= invoice.value %>
+              <tr class="line-subitem" >
+                <td class="subitem" style="padding-left:40px;"> 5.3) Conferência do valor cobrado:
+                <p class="text-color-blue" style="padding-left:25px;color:#1351B4;">ENCONTRADO: contrato (c): <%= item_41.price %>  | fatura (f): <%= invoice.value %>
                 | diferença: (c - f) = R$ <%= sprintf('%5.2f',item_41.price-invoice.value)  %></p>
                 </td>
                 <td class="result text-center">
