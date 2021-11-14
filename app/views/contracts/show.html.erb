@@ -1,9 +1,9 @@
-<div class="show-contract">
-  <div class="container-md mt-4">
-    <div class="row">
-      <div class="col-12">
-        <div class="card-body">
-          <div class="col-10"><h5><%= "Detalhes do contrato nº #{@contract.number}" %></h5><br><br>
+<span class="show-contract">
+  <div class="container-md mt-5">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="">
+          <h5 style="text-align:center"><%= "Detalhes contrato nº #{@contract.number}" %></h5><br><br>
             <ul class="list-group list-group-flush ">
               <%# Cabecalho dados contrato %>
               <li class="list-group-item"> <strong> <%= "Nº  #{@contract.number}" %> </strong>
@@ -91,16 +91,13 @@
                     </ul>
                   </div>
                   <br><br>
-                      <div class="col-sm-2">
-                        <div class="">
-                          <%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %>
-                        </div>
-                        <br><br><br>
-                      </div>
+                    <p class="" style="text-align:center">
+                      <%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %>
+                    </p><br>
                 </div>
             </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</span>

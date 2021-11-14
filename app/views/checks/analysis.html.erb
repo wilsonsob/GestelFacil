@@ -1,53 +1,45 @@
+
 <div class="container-md mt-4">
-<meta charset="utf-8" />
-
-  <div class="row justify-content-center">
-    <div class="col-sm-10">
-      <div class="card-body">
-        <!-- Cabecalho -->
-        <%= render 'header_report' %>
-
-        <!-- Checklist -->
+  <meta charset="utf-8" />
+    <div class="row justify-content-center">
+      <div class="col-sm-10">
         <div class="card-body">
-          <table class="table table-hover">
-            <tr class="line-header">
-              <th class="item-header" style="padding-left:25px;"><p></p><h6><strong>Itens conferência automática</strong></h6></th>
-              <th class="result-reader text-center" style="padding-right:25px;"><p></p><h6><strong>Resultado</strong></h6></th>
-            </tr>
-          <!-- 1 -->
-          <%= render 'cnpj' %>
+          <!-- Cabecalho -->
+          <%= render 'header_report' %>
 
-          <!-- 2 -->
-          <%= render 'competence' %>
+          <!-- Checklist -->
+          <div class="card-body">
+            <table class="table table-hover">
+              <tr class="line-header">
+                <th class="item-header" style="padding-left:25px;"><p></p><h6><strong>Itens conferência automática</strong></h6></th>
+                <th class="result-reader text-center" style="padding-right:25px;"><p></p><h6><strong>Resultado</strong></h6></th>
+              </tr>
+              <!-- 1 -->
+              <%= render 'cnpj' %>
 
-          <!-- 3 -->
-          <%= render 'services' %>
+              <!-- 2 -->
+              <%= render 'competence' %>
 
-          <!-- 4 -->
-          <%= render 'key_words' %>
+              <!-- 3 -->
+              <%= render 'services' %>
 
-          <!-- 5 -->
-          <%= render 'fixed_price' %>
+              <!-- 4 -->
+              <%= render 'key_words' %>
 
-          </table>
+              <!-- 5 -->
+              <%= render 'fixed_price' %>
+
+            </table>
+          </div>
         </div>
       </div>
+      </table>
+      <br>
+      <br>
     </div>
-    </table>
-    <br>
-    <br>
-    </div>
-</div>
-
-<div class="container-md mt-4">
-  <div class="row justify-content-center">
-    <div class="col-3">
-
-      <div class="">
+        <p style="text-align:center">
         <%= link_to 'Exportar relatório', analysis_path(format: :pdf), class:"btn-custom" %>
-      </div>
-
-        <br><br>
-    </div>
+        </p>
   </div>
 </div>
+        <br><br>

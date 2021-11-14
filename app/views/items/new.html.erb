@@ -1,20 +1,17 @@
-<div class="container-md mt-5">
-  <div class="row">
+<div class="container-md mt-4">
+  <div class="row justify-content-center">
     <div class="col-8">
-      <h6><strong> <%= "Cadastrar itens/serviços: vigência
-         #{@term.date_start.strftime("%d/%m/%Y")} - #{@term.date_end.strftime("%d/%m/%Y")},
-          contrato nº #{@term.contract.number}" %> </strong></h6>
-        <div class="form m-5">
+      <h6 style="text-align:center"><%= "Cadastrar novo item" %></h6>
+      <h6 style="text-align:center"><%= "Contrato n. #{@term.contract.number}" %></h6>
+      <h6 style="text-align:center"><%="#{@term.date_start.strftime("%d/%m/%Y")} - #{@term.date_end.strftime("%d/%m/%Y")}"%></h6>
+
+        <div class="form m-3">
           <%= render 'shared/form_item' %>
         </div>
           <hr>
 
-          <div class="btn btn-info mr-5">
-            <%= link_to "Voltar", contract_path(@term.contract_id) %>
-          </div>
-          <div class="btn btn-light">
-            <%= link_to 'Todos os contratos', contracts_path %>
-          </div>
+          <%= link_to "Voltar à página do contrato n. #{@term.contract.number}", @term.contract, class:"btn-custom-light" %>
+          <%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %>
 
     </div>
   </div>
