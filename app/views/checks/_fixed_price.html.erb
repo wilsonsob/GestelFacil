@@ -16,8 +16,13 @@
                 <td class="subitem" style="padding-left:40px;"> 5.1) Identificação do serviço:
                  <% item_41 = term.items.find{ |item| item.item_number == 41} %>
                     <% invoices_code_10538.each do |invoice| %>
-                      <p style="padding-left:25px;color:#1351B4;"> ENCONTRADO: <%= invoice.service_name.downcase %></p>
-                      <% item_10538 = invoice.term.items.find_by(service_code: 10538) %>
+                    <% item_10538 = invoice.term.items.find_by(service_code: 10538) %>
+                      <% if item_10538  %>
+                      <p style="padding-left:25px;color:#007575;">Localizado:  <%= invoice.service_name.downcase %></p>
+
+                      <% else %>
+                      <p style="padding-left:25px;color:#9b2226;"> Não localizado.</p>
+                      <% end %>
                 </td>
 
                 <td class="result text-center" style="padding-left:25px;">
@@ -31,11 +36,19 @@
               </tr>
               <tr class="line-subitem" >
                 <td class="subitem" style="padding-left:40px;"> 5.2) Avaliação da qtd de lançamentos na fatura:
-                  <p style="padding-left:25px;color:#1351B4;">
-                  <%= " ENCONTRADO: fatura = #{invoices_code_10538.count} | limite contratual mensal = #{item_10538.quantity}" %></p>
+                  <% if invoices_code_10538.count > item_10538.quantity   %>
+                    <p style="padding-left:25px;color:#007575;">
+                    <%= " Fatura = #{(item_10538.quantity)*12} | limite contratual mensal = #{item_10538.quantity}" %></p>
+                    <% else %>
+                    <p style="padding-left:25px;color:#9b2226;">
+                    <%= " Fatura = #{(item_10538.quantity)*12} | limite contratual mensal = #{item_10538.quantity}" %></p>
+                    <% end %>
+
                 </td>
+
+
                 <td class="result text-center" style="padding-left:25px;">
-                    <% if item_10538.quantity > invoices_code_10538.count   %>
+                    <% if invoices_code_10538.count > item_10538.quantity   %>
                       <li style="list-style-type: none"><i class="fas fa-check"></i></li>
                     <% else %>
                     <i class="fas fa-exclamation-triangle"></i>
@@ -44,9 +57,16 @@
               </tr>
               <tr class="line-subitem" >
                 <td class="subitem" style="padding-left:40px;"> 5.3) Conferência do valor cobrado:
-                <p class="text-color-blue" style="padding-left:25px;color:#1351B4;">ENCONTRADO: contrato (c):
-                <%= "R$ #{number_to_currency(item_41.price, separator: ',', delimiter: '.', unit: '')}" %>  | fatura (f): <%="R$ #{number_to_currency(invoice.value, separator: ',', delimiter: '.', unit: '')}" %>
+                <% if invoice.value == item_41.price  %>
+                <p class="text-color-blue" style="padding-left:25px;color:#007575;">Contrato (c):
+                <%= "R$ #{number_to_currency(item_41.price, separator: ',', delimiter: '.', unit: '')}" %>  | Fatura (f): <%="R$ #{number_to_currency(invoice.value, separator: ',', delimiter: '.', unit: '')}" %>
                 | diferença: (c - f) = <%= "R$ #{number_to_currency(item_41.price-invoice.value, separator: ',', delimiter: '.', unit: '')}"  %></p>
+                <% else %>
+                <p class="text-color-blue" style="padding-left:25px;color:#9b2226;">Contrato (c):
+                <%= "R$ #{number_to_currency(item_41.price, separator: ',', delimiter: '.', unit: '')}" %>  | Fatura (f): <%="R$ #{number_to_currency(invoice.value, separator: ',', delimiter: '.', unit: '')}" %>
+                | diferença: (c - f) = <%= "R$ #{number_to_currency(item_41.price-invoice.value, separator: ',', delimiter: '.', unit: '')}"  %></p>
+                <% end %>
+
                 </td>
                 <td class="result text-center">
                     <% if invoice.value == item_41.price  %>
