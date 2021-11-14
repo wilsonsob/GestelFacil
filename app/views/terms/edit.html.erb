@@ -1,15 +1,15 @@
 <div class="container-md mt-5">
   <div class="row">
     <div class="col-8">
-      <h5><strong> <%= "Editar vigência do contrato nº #{@term.contract.number}" %> </strong></h5>
-        <div class="form m-5">
+      <h5><%= "Editar vigência do contrato nº #{@term.contract.number}" %></h5>
+        <hr>
+        <div class="form m-4">
           <%= render 'shared/form_term', contract: @contract, term: @term %>
         </div>
           <hr>
 
-          <div class="btn btn-light">
-            <%= link_to 'Voltar', contracts_path %>
-          </div>
+          <%= link_to "Voltar à página do contrato n. #{@term.contract.number}", @term.contract, class:"btn-custom-light" %>
+          <%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %>
     </div>
   </div>
 </div>
