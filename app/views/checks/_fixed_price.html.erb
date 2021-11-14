@@ -45,8 +45,8 @@
               <tr class="line-subitem" >
                 <td class="subitem" style="padding-left:40px;"> 5.3) Conferência do valor cobrado:
                 <p class="text-color-blue" style="padding-left:25px;color:#1351B4;">ENCONTRADO: contrato (c):
-                <%= "R#{number_to_currency(item_41.price)}" %>  | fatura (f): <%="R#{number_to_currency(invoice.value)}" %>
-                | diferença: (c - f) = <%= "R#{number_to_currency(item_41.price-invoice.value)}"  %></p>
+                <%= "R$ #{number_to_currency(item_41.price, separator: ',', delimiter: '.', unit: '')}" %>  | fatura (f): <%="R$ #{number_to_currency(invoice.value, separator: ',', delimiter: '.', unit: '')}" %>
+                | diferença: (c - f) = <%= "R$ #{number_to_currency(item_41.price-invoice.value, separator: ',', delimiter: '.', unit: '')}"  %></p>
                 </td>
                 <td class="result text-center">
                     <% if invoice.value == item_41.price  %>
