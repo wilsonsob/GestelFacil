@@ -1,8 +1,30 @@
-<%# <%= form.file_field :attachments, multiple: true, direct_upload: true %>
-<%# <input type=file data-direct-upload-url="<%= rails_direct_uploads_url %>" /> %>
+  <div class="container-md mt-5 ">
+    <h5 style="text-align:center"><%= "Carregar fatura" %></h5>
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <br>
+            <ul class="list-group list-group-flush ">
+              <%# Cabecalho dados contrato %>
+              <li class="list-group-item"> <%= "Contrato n. #{@term.contract.number}" %></li>
+              <li class="list-group-item"> Contratada: <%= @term.contract.company %></li>
+              <li class="list-group-item"> Objeto: <%= "#{@term.contract.object[0..100]}" %><%=link_to "...", contract_path(@term)%></li>
+              <li class="list-group-item"> CNPJ: <%= @term.contract.cnpj_hired %></li>
+              <li class="list-group-item"> <strong> Vigência: <i class="far fa-calendar-alt"></i>
+              <%="  #{@term.date_start.strftime("%d/%m/%Y")} - #{@term.date_end.strftime("%d/%m/%Y")}" %></strong>
+              <br><br>
 
-<%= simple_form_for([@term, @invoice]) do |f| %>
-<%= f.input :file, as: :file %>
- <%= f.submit "Import" %>
-
- <% end %>
+        <div class="d-flex justify-content-center">
+          <div class="p-2">
+            <%= simple_form_for([@term, @invoice]) do |f| %>
+              <%= f.input :file, as: :file %>
+              <%= f.submit "     Salvar     ", class: "btn-custom"  %>
+            <% end %>
+          </div>
+          </li>
+          <br>
+            <%= link_to 'Meus contratos', profile_path, class: "btn-custom-light" %>
+            <br><br><br>
+        </div>
+   </div>
+  </div>
+</div>

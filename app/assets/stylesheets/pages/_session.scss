@@ -70,3 +70,75 @@ input[type=text]:focus, input[type=password]:focus {
   color: #FABD10;
   font-size: 20px;
 }
+
+.table {
+  background-color:white;
+  box-shadow:0 2px 4px #00000033;
+  font-size:14px;
+}
+
+.profile-ct{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color:#191919;
+  a {
+    text-decoration: none;
+    color: #191919;
+  }
+}
+
+.profile-ct-ul{
+  padding-left: 10px;
+}
+
+.profile-ft{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color:#191919;
+  a {
+    text-decoration: none;
+    color: #191919;
+  }
+}
+
+.profile-ft-ul{
+  padding-left: 50px;
+}
+
+.profile-page{
+  .fa-file-alt {
+    color: #1351B4;
+    font-size: 18px;
+  }
+  .fa-robot {
+    color: #1351B4;
+    font-size: 18px;
+  }
+
+  .fa-handshake{
+    color: #1351B4;
+    font-size: 18px;
+  }
+
+  .fa-plus{
+    color: #1351B4;
+    font-size: 16px;
+  }
+}
+
+.show-contract{
+  .fa-calendar-alt{
+    color: #191919;
+    font-size: 18px;
+  }
+
+  .fa-file-import{
+    color: #191919;
+    font-size: 17px;
+  }
+
+  .fa-user-plus{
+    color: #191919;
+    font-size: 16px;
+  }
+}

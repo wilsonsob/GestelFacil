@@ -1,16 +1,17 @@
-<div class="container-form d-flex justify-content-center" style="max-width:600px;">
-  <div class="row" style="width:100%;">
-    <div style="width:100%;" >
-      <h5 style="text-align:center"><b>Novo contrato</b></h5>
-      <hr>
-      <div class="m-4" >
-        <%= render 'shared/form' %>
+<div class="container-md mt-5">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <h5 style="text-align:center">Novo contrato</h5>
+        <hr>
+        <div class="m-4" >
 
-        <br>
-        <div >
-          <%= link_to 'Voltar', contracts_path, style:"width:100%;" %>
+          <%= render 'shared/form' %>
+          <br>
+
         </div>
-      </div>
+        <hr>
+      <p style="text-align:center"><%= link_to 'Meus contratos', profile_path, class:"btn-custom-light" %></p>
+      <br>
     </div>
   </div>
 </div>

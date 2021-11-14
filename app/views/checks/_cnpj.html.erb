@@ -5,8 +5,8 @@
               <% invoices_uniq_number.each do |invoice| %>
 <!-- Check -->
                 <tr class="line">
-                  <td class="item">1) A fatura foi emitida em favor do CNPJ do órgão contratante?</td>
-                  <td class="result text-center">
+                  <td class="item" style="padding-left:25px;">1) A fatura foi emitida em favor do CNPJ do órgão contratante?</td>
+                  <td class="result text-center" style="padding-left:25px;">
                     <% if invoice.cnpj_contractor == invoice.term.contract.cnpj_contractor  %>
                       <i class="fas fa-check"></i>
                       <% else %>
