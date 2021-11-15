@@ -11,21 +11,22 @@
           <% end %>
         </ul>
 
-        <% @my_commissions.each do |commission| %>
+        <% Contract.all.each do |contract| %>
           <div class="cards-profile ">
             <table class="table table-hover">
             <td class="profile-ct">
             <ul class="profile-ct-ul">
-            <%= link_to contract_path(commission.contract) do %>
-              <%="  Contrato n. #{commission.contract.number} | #{commission.contract.company} " %>
+            <%= link_to contract_path(contract) do %>
+              <%="  Contrato n. #{contract.number} | #{contract.company} " %>
               <i class="fas fa-handshake"></i></ul>
             <% end %>
             </td>
             <tr>
-              <% commission.contract.terms.each do |term| %>
+              <% contract.terms.each do |term| %>
               <td class="profile-ft">
                 <% invoices = term.invoices.uniq(&:number) %>
-                  <% invoices.each do |invoice| %>
+                <% invoices_sort_desc = invoices.sort_by{ |invoice| invoice.date_invoice }.reverse %>
+                  <% invoices_sort_desc.each do |invoice| %>
                     <ul class="profile-ft-ul">
                     <%= link_to invoices_path do %>
                       <%= "Fatura n. #{invoice.number}" %>
@@ -34,10 +35,10 @@
                     <%= " (competência mês  #{invoice.date_invoice.strftime("%m")}) |" %>
                       <%= link_to analysis_path do %>
                         <%= "análise automática" %>
-                        <i class="fas fa-robot"></i>
+                        <i class="fas fa-robot"></i></ul>
                       <% end %>
                   <% end %>
-              <% end %></ul>
+              <% end %>
             </td>
             </tr>
             </table>
