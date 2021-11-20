@@ -1,0 +1,33 @@
+<div class="container-md mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h5 class="text-left"><%= "Detalhes" %></h5>
+      <div class="card-body" style="text-align:center;">
+        <table class="table table-hover" style="font-size:13px">
+            <tr>
+              <th class="">Nº fatura</th>
+              <th class="">Serviço</th>
+              <th class="">Serviço cód.</th>
+              <th class="">Identificador</th>
+              <th class="">Valor cobrado R$</th>
+
+            </tr>
+            <% @details.each do |detail| %>
+              <tr>
+                <td class=""><%= detail.invoice_number  %></td>
+                <td class=""><%= detail.service_name  %></td>
+                <td class=""><%= detail.service_code  %></td>
+                <td class=""><%=  detail.id  %></td>
+                <td class=""><%= "R$ #{number_to_currency(detail.value, separator: ',', delimiter: '.', unit: '')}"  %></td>
+
+              </tr>
+            <% end %>
+        </table>
+        <br>
+        <%= link_to "Página incial", root_path, class:"btn-custom-light" %>
+        <%= link_to "Meus contratos", commissions_path, class:"btn-custom-light" %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

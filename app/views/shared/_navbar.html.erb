@@ -12,14 +12,14 @@
           <%= link_to "Página Inicial", "/" %>
         </li>
         <li class="list-bar">
-          <%= link_to 'Contratos', profile_path %>
+          <%= link_to 'Contratos', commissions_path %>
         </li>
-        <li class="list-bar">
+        <%# <li class="list-bar">
           <%= link_to 'Faturas', invoices_path %>
-        </li>
+        <%#</li>
         <li class="list-bar">
           <%= link_to 'Análises', analysis_path %>
-        </li>
+        <%#</li> %>
       </ul>
       </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,10 +34,10 @@
           <%= image_tag "checked_user_blue.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Página inicial", "/", class: "dropdown-item" %>
-            <%= link_to "Ver contratos", "/contracts", class: "dropdown-item" %>
+            <%= link_to "Todos os contratos", "/contracts", class: "dropdown-item" %>
             <%= link_to "Novo contrato", "/contracts/new", class: "dropdown-item" %>
-            <%= link_to "Faturas", "/invoices", class: "dropdown-item" %>
-            <%= link_to "Análises", "/analysis", class: "dropdown-item" %>
+            <%#= link_to "Faturas", "/invoices", class: "dropdown-item" %>
+            <%#= link_to "Análises", "/analysis", class: "dropdown-item" %>
             <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>

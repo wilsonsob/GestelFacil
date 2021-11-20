@@ -1,0 +1,131 @@
+<span class="show-term">
+<div class="container-md mt-5">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <div class="">
+        <h5 style="text-align:left"><strong><%= "Vigência #{@term.date_start.strftime("%d/%m/%Y")} - #{@term.date_end.strftime("%d/%m/%Y")}" %></strong></h5><br>
+        <ul class="list-group list-group-flush ">
+        <%# Cabecalho dados contrato %>
+        <li class="list-group-item"> <%= "Contrato n. #{@term.contract.number}" %></li>
+          <li class="list-group-item"> Contratada: <%= @term.contract.company %></li>
+          <li class="list-group-item"> Objeto: <%= @term.contract.object[0..70] %>...</li>
+          <li class="list-group-item"> <strong> Itens</strong> <%= link_to '| cadastrar novo item', new_term_item_path(@term) %>
+
+
+                  <div class="card-body m-3">
+                    <% if @term.items.present?%>
+                    <%# Tabela items %>
+                      <table class="table table-sm">
+                      <thead>
+                      <tr>
+                      <th class="">Nº</th>
+                      <th class="">Descrição</th>
+                      <th class="">Qtd</th>
+                      <th class="">Preço</th>
+                      </tr>
+                      </thead>
+
+                      <ul><% @term.items.each do |item| %>
+
+                        <tr>
+                        <td class=""><%= link_to "#{item.item_number}", edit_item_path(item) %></td>
+                        <td class=""><%= link_to "#{item.item_title.downcase}", edit_item_path(item) %></td>
+                        <td class=""><%= item.quantity  %></td>
+                        <td class=""><%= "R$ #{number_to_currency(item.price, separator: ',', delimiter: '.', unit: '')}   " %>
+                        <% if item.fixed_price  %>
+                        <abbr title="item preço fixo"><i class="fas fa-thumbtack"></i></abbr>
+
+                        <% end %>
+                        </td>
+                        </tr>
+                      <% end %>
+                      </table>
+                    <% else %>
+                      <ul><em> Nenhum item cadastrado. </em>
+                    <% end %>
+                </div>
+
+
+              </li>
+
+              <li class="list-group-item"> <strong>Faturas</strong>
+                <%= link_to new_term_invoice_path(@term) do %>
+                  <%= " | carregar nova fatura" %>
+                  <i class="fas fa-file-import"></i>
+                <% end %>
+                  <div class="card-body m-3">
+                    <% if @term.invoices.present?%>
+                      <% @term.invoices.sort_by(&:created_at) %>
+                    <%# Tabela faturas %>
+                      <table class="table table-sm">
+                      <thead>
+                      <tr>
+                      <th class="">Nº</th>
+                      <th class="">Referência</th>
+                      <th class="">Valor total</th>
+                      </tr>
+                      </thead>
+
+
+                      <ul><% @term.invoices.each do |invoice| %>
+                        <tr>
+                        <td class="">
+                          <%= link_to invoice_path(invoice) do %>
+                            <i class="fas fa-robot"></i>
+                            <%= "#{invoice.number}" %>
+                          <% end %>
+                        </td>
+
+                        <td class=""><%= "#{invoice.details.first.date_invoice.strftime("%d/%m/%Y")}" %></td>
+                        <td class=""><%= "R$ #{number_to_currency(invoice.details.sum(:value), separator: ',', delimiter: '.', unit: '')}  " %>
+                        </td>
+                        </tr>
+                      <% end %>
+                      </table>
+                    <% else %>
+                      <ul><em> Nenhuma fatura carregada. </em>
+                    <% end %>
+                </div>
+              <li class="list-group-item"> <strong>Controle do saldo contratual</strong>
+
+                  <div class="card-body m-3">
+                    <%# Controle %>
+                      <table class="table table-sm">
+                        <tr>
+                        <td class="">Valor total do contrato para a vigência (a)</td>
+                        <td class=""><%= "R$ #{number_to_currency(@yearly, separator: ',', delimiter: '.', unit: '')}" %></td>
+                        </tr>
+                        <tr>
+                        <td class="">Valor mensal estimado</td>
+                        <td class=""><%= "R$ #{number_to_currency(@monthly, separator: ',', delimiter: '.', unit: '')}" %></td>
+                        </tr>
+                        <tr>
+                        <td class="">Soma de faturas (b)</td>
+                        <td class=""><%= "R$ #{number_to_currency(@total_invoices, separator: ',', delimiter: '.', unit: '')}" %></td>
+                        </tr>
+                        <tr>
+                        <td class=""><strong>Saldo contratual (c = a - b)</strong></td>
+                        <td class=""><strong><%= "R$ #{number_to_currency(@balance_available, separator: ',', delimiter: '.', unit: '')}" %></strong></td>
+                        </tr>
+                      </table>
+                      <% %>
+
+                </div>
+
+              </li>
+
+                    </li><hr>
+                    </ul>
+                  </div>
+
+                    <p class="" style="text-align:center">
+                    <%= link_to "Voltar à página do contrato n. #{@term.contract.number}", @term.contract, class:"btn-custom-light" %>
+                      <%= link_to 'Meus contratos', commissions_path(@term.contract), class:"btn-custom-light" %>
+              </p><br>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</span>

@@ -1,0 +1,18 @@
+
+          <tr class="line">
+          
+            <td class="item" style="padding-left:25px;">2) O período de prestação de serviços está coberto pela vigência contratual?
+            <p class="courier" style="padding-left:25px;">Competência da fatura: 01/<%= @invoice.details.first.date_invoice.strftime("%m/%Y") %>
+                - 30/<%= @invoice.details.first.date_invoice.strftime("%m/%Y") %>,
+                Contrato: <%= @invoice.term.date_start.strftime("%d/%m/%Y") %> - <%= @invoice.term.date_end.strftime("%d/%m/%Y") %></p>
+            </td>
+
+            <td class="result text-center" style="padding-left:25px;">
+              <% if @invoice.details.first.date_invoice > @invoice.term.date_start && @invoice.details.first.date_invoice < @invoice.term.date_end %>
+                <i class="fas fa-check"></i>
+              <% else %>
+                <i class="fas fa-exclamation-triangle"></i>
+              <% end %>
+            </td>
+
+          </tr>

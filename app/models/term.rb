@@ -3,5 +3,6 @@ class Term < ApplicationRecord
   has_many :items
   has_many :invoices
   has_many :results, through: :invoices
+  has_many :details, through: :invoices
   validates :number, :date_start, :date_end, presence: true
 end

@@ -127,16 +127,22 @@ input[type=text]:focus, input[type=password]:focus {
   }
 }
 
-/* page show contract */
-.show-contract{
+/* page show term */
+.show-term{
   .fa-calendar-alt{
     color: #191919;
     font-size: 18px;
   }
+  .fa-thumbtack{
+    color: #1351b4;
+    font-size: 15px;
+    padding-left: 5px;
+  }
 
-  .fa-file-import{
-    color: #191919;
+  .fa-file-import, .fa-robot{
+    color: #1351b4;
     font-size: 17px;
+    padding: 4px;
   }
 
   .fa-user-plus{
@@ -151,4 +157,20 @@ input[type=text]:focus, input[type=password]:focus {
     text-decoration: none;
     color: #191919;
   }
+}
+
+/* index commissions */
+.fa-calendar-check {
+  color: #1351B4;
+  font-size: 18px;
+}
+
+.fa-calendar-times {
+  color: gray;
+  font-size: 18px;
+}
+
+.courier {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
 }

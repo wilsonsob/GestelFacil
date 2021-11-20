@@ -1,0 +1,71 @@
+
+            <tr class="line">
+              <td class="item" style="padding-left:25px;">4) Checagem da inexistência de palavras pré-definidas no campo de descrição dos serviços faturados:</td>
+              <td></td>
+            </tr>
+
+            <tr class="line-subitem">
+              <td class="subitem" style="padding-left:40px;"> 4.1) multa, mul
+              <p class="courier">
+               <% search1 = @invoice.details.uniq(&:service_name).select {|detail| detail.service_name.downcase.include?("multa")} %>
+               <% if search1.count == 1 %>
+               <%= link_to "#{search1.first.service_name} - identificador #{search1.first.id}", details_path(detail.invoice_id) %>
+               <% else %>
+               <% search1.each do |detail| %>
+               <%= link_to "#{detail.service_name} - identificador #{detail.id}", details_path(detail.invoice_id)  %>
+               <% end %>
+               <% end %>
+              </td>
+            <td class="result text-center" style="padding-left:25px;">
+
+          <% if search1.present? %>
+            <i class="fas fa-exclamation-triangle"></i>
+          <% else %>
+            <i class="fas fa-check"></i>
+          <% end %>
+              </td>
+            </tr>
+
+            <tr class="line-subitem">
+              <td class="subitem" style="padding-left:40px;"> 4.2) encargo, enc
+              <p class="courier">
+               <% search2 = @invoice.details.uniq(&:service_name).select {|detail| detail.service_name.downcase.include?("encargo")} %>
+               <% if search2.count == 1 %>
+               <%= link_to "#{search2.first.service_name} - identificador #{search2.first.id}", details_path(detail.invoice_id) %>
+               <% else %>
+               <% search2.each do |detail| %>
+               <%= link_to "#{detail.service_name} - identificador #{detail.id}", details_path(detail.invoice_id)  %>
+               <% end %>
+               <% end %>
+              </td>
+            <td class="result text-center" style="padding-left:25px;">
+
+          <% if search2.present? %>
+            <i class="fas fa-exclamation-triangle"></i>
+          <% else %>
+            <i class="fas fa-check"></i>
+          <% end %>
+              </td>
+            </tr>
+
+            <tr class="line-subitem">
+              <td class="subitem" style="padding-left:40px;"> 4.3) atraso, atra
+              <p class="courier">
+               <% search3 = @invoice.details.uniq(&:service_name).select {|detail| detail.service_name.downcase.include?("atraso")} %>
+               <% if search3.count == 1 %>
+               <%= link_to "#{search1.first.service_name} - identificador #{search3.first.id}", details_path(detail.invoice_id) %>
+               <% else %>
+               <% search3.each do |detail| %>
+               <%= link_to "#{detail.service_name} - identificador #{detail.id}", details_path(detail.invoice_id)  %>
+               <% end %>
+               <% end %>
+              </td>
+            <td class="result text-center" style="padding-left:25px;">
+
+          <% if search3.present? %>
+            <i class="fas fa-exclamation-triangle"></i>
+          <% else %>
+            <i class="fas fa-check"></i>
+          <% end %>
+              </td>
+            </tr>

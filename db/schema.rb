@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_173402) do
+ActiveRecord::Schema.define(version: 2021_11_15_204245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,16 +113,26 @@ ActiveRecord::Schema.define(version: 2021_11_15_173402) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "details", force: :cascade do |t|
+    t.string "invoice_number"
+    t.integer "service_code"
+    t.string "cnpj_contractor"
+    t.float "value"
+    t.string "service_name"
+    t.date "date_invoice"
+    t.bigint "invoice_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_details_on_invoice_id"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.string "number"
-    t.integer "service_code"
     t.float "value"
-    t.string "cnpj_contractor"
     t.bigint "term_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "service_name"
-    t.date "date_invoice"
+    t.text "note"
     t.index ["term_id"], name: "index_invoices_on_term_id"
   end
 
@@ -135,6 +145,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_173402) do
     t.bigint "term_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "fixed_price", default: false
     t.index ["term_id"], name: "index_items_on_term_id"
   end
 
@@ -173,6 +184,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_173402) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "commissions", "contracts"
   add_foreign_key "commissions", "users"
+  add_foreign_key "details", "invoices"
   add_foreign_key "invoices", "terms"
   add_foreign_key "items", "terms"
   add_foreign_key "results", "invoices"
