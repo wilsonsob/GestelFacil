@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-before_action :find, only: %i[show edit update]
+  before_action :find, only: %i[show edit update]
 
   def index
     @contracts = Contract.all
@@ -7,7 +7,10 @@ before_action :find, only: %i[show edit update]
 
   def show
     @commission = Commission.new
-    @users = User.all
+    # @current_commission = @contract.commissions.each{|commission|commission.user_id}
+    # @users_nonmembers = User.all.reject.{@contract.commissions.each{|commission| commission.user}}
+    # @user = current_user
+    # @my_commissions = Commission.where(user_id: @user)
   end
 
   def new
@@ -33,6 +36,7 @@ before_action :find, only: %i[show edit update]
       render :edit
     end
   end
+
 
   private
 

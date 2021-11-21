@@ -1,0 +1,7 @@
+
+<div class="container-md", style="padding: 20px;">
+  <%= simple_form_for(@invoice) do |f| %>
+    <%= f.input :note, label: 'Observações...' %>
+    <%= f.button :submit, "Salvar", class:"btn-custom-light" %>
+  <% end %>
+</div>

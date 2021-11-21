@@ -1,0 +1,17 @@
+
+          <tr class="line">
+            <td class="item" style="padding-left:25px;">6) Há saldo contratual suficiente para a cobertura da fatura?
+            <% @invoice.term %>
+            <% if @balance_available %></p>
+            <% else %>
+              <p > </p>
+            <% end %>
+            </td>
+            <td class="result text-center" style="padding-left:25px;">
+              <% if @balance_available %>
+                <i class="fas fa-check"></i>
+              <% else %>
+                <i class="fas fa-exclamation-triangle"></i>
+              <% end %>
+            </td>
+          </tr>

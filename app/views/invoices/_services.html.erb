@@ -1,0 +1,57 @@
+                    <!-- filtro de servicos exclusivos (lista de details) -->
+                    <% list_details = @invoice.details.uniq(&:service_code).each do |detail| %>
+                      <% "#{detail.service_code} - #{detail.service_name}" %>
+                    <% end %>
+                    <!-- array de codigos exclusivos - invoice -->
+                    <% invoice_services = @invoice.details.map{ |detail| detail.service_code}.uniq %>
+                    <!-- itens da vigencia -->
+                    <% list_items =   %>
+                    <% @invoice.term.items.each do |item| %>
+                      <% "#{item.service_code} - #{item.item_title}" %>
+                    <% end %>
+                    <!-- array de codigos exclusivos - contrato/vigencia -->
+                    <% contract_items = @invoice.term.items.map{ |item| item.service_code} %>
+                    <!-- distincao (codido) -->
+                    <% distinction = invoice_services - contract_items %>
+                    <!-- distincao - detalhes -->
+                    <% distincts = @invoice.details.uniq(&:service_code).select do |detail| %>
+                      <% distinction.each do |code| %>
+                        <% if detail.service_code == code %>
+                        <% "#{detail.service_code} - #{detail.service_name}" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+  <tr>
+  <td style="padding-left:25px;">3) Os serviços localizados na fatura correspondem aos serviços contratados e vigentes?
+
+    <li class="courier" style="list-style-type: none; padding-left:25px;"> Fatura:
+    <% invoice_services.each_with_index do |element, index| %>
+    <%= element %>
+    <% end %>
+    </li>
+
+    <li class="courier" style="list-style-type: none; padding-left:25px;"> Contrato(vigência):
+    <% contract_items.each_with_index do |element, index| %>
+    <%= element %>
+    <% end %>
+    </li>
+
+    <li class="courier" style="list-style-type: none; padding-left:25px;"> Inconsistentes:
+                          <% distincts = @invoice.details.uniq(&:service_code).select do |detail| %>
+                      <% distinction.each do |code| %>
+                        <% if detail.service_code == code %>
+                        <%= "#{detail.service_code} - #{detail.service_name}" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+    </li>
+    </td>
+
+    <td class="text-center" style="padding-left:25px;">
+      <% if distinction %>
+        <i class="fas fa-exclamation-triangle"></i>
+      <% else %>
+        <i class="fas fa-check"></i>
+      <% end %>
+    </td>
+    </tr>

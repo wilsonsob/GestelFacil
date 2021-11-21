@@ -1,0 +1,32 @@
+
+              <tr class="line">
+                <td class="item" style="padding-left:25px;"> 5) Conferência de serviço(s) de preço fixo:
+
+
+
+<%  item_fixed = @invoice.term.items.where(fixed_price: true).each do |item| %>
+
+<li class="courier" style="list-style-type: none;padding-left:25px;">
+<%= " Item/contrato: #{item.service_code} - #{item.item_title} - R$ #{number_to_currency(item.price, separator: ',', delimiter: '.', unit: '')}" %></li>
+<span>
+<% detail_fixed = @invoice.details.where(service_code: item.service_code).uniq(&:value).each do |detail| %>
+<% if detail.present? %>
+
+<li class="courier" style="list-style-type: none;padding-left:25px;"><%= " Fatura: identificador 000#{detail.id}/#{detail.service_code} -
+  R$ #{number_to_currency(detail.value, separator: ',', delimiter: '.', unit: '')}" %></li>
+<% end %>
+
+
+<%#= "Fatura: #{detail.service_code}: identificador 000#{detail.id} - #{detail.value}" if detail.present? %></span>
+<% end %>
+<% end %></td>
+                </td>
+                <td class="result text-center">
+                    <% if @invoice.details.where(service_code: 10538).uniq(&:value).first.value == @invoice.term.items.where(fixed_price: true).first.price %>
+                      <i class="fas fa-check"></i>
+                    <% else %>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <% end %>
+
+                </td>
+              </tr>

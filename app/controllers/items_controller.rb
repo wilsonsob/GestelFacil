@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-before_action :set_term, only: %i[new create]
-before_action :set_item, only: %i[edit update]
+  before_action :set_term, only: %i[new create]
+  before_action :set_item, only: %i[edit update]
 
   def new
     @item = Item.new
@@ -33,7 +33,7 @@ before_action :set_item, only: %i[edit update]
   private
 
   def item_params
-    params.require(:item).permit(:item_number, :item_title, :service_code, :quantity, :price)
+    params.require(:item).permit(:item_number, :item_title, :service_code, :quantity, :price, :fixed_price, :specification)
   end
 
   def set_term

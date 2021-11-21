@@ -1,0 +1,19 @@
+<%# if @invoice.details.uniq(&:date_invoice).count == 1 %>
+          <tr class="line">
+          <td class="item" style="padding-left:25px;">1) A fatura foi emitida em favor do CNPJ do órgão contratante?
+
+              <p class="courier" style="padding-left:25px;">Fatura: <%= @invoice.details.first.cnpj_contractor%>,
+              Contrato: <%= @invoice.term.contract.cnpj_contractor  %></p>
+
+          </td>
+
+          <td class="result text-center" style="padding-left:25px;">
+
+            <% if @invoice.details.first.cnpj_contractor == @invoice.term.contract.cnpj_contractor  %>
+              <i class="fas fa-check"></i>
+            <% else %>
+              <i class="fas fa-exclamation-triangle"></i>
+            <% end %>
+
+          </td>
+          </tr>

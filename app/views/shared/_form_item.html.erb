@@ -2,7 +2,8 @@
   <%= f.input :item_number, label: 'Item nº', placeholder: 'Ex.: 1' %>
   <%= f.input :item_title, label: 'Descrição', placeholder: 'Conforme termo de referência' %>
   <%= f.input :service_code, label: 'Código do serviço constante na fatura', placeholder: 'Ex.: 1515' %>
-  <%= f.input :quantity, label: 'Quantidade', placeholder: 'Ex.: 10 (quando houver)' %>
-  <%= f.input :price, label: 'Valor R$', placeholder: '50' %>
+  <%= f.input :quantity, label: 'Qtd mensal', placeholder: 'Ex.: 10 (quando houver)' %>
+  <%= f.input :price, label: 'Preço unitário', placeholder: '50' %>
+  <%= f.input :fixed_price, as: :boolean, checked_value: true, unchecked_value: false, label: 'Preço fixo?'%>
   <%= f.button :submit, "   Salvar   ", class: "btn-custom" %>
 <% end %>

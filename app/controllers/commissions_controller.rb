@@ -16,6 +16,12 @@ before_action :set_contract, only: %i[new create]
     end
   end
 
+  def index
+    @user = current_user
+    # @commissions = Commission.where(user_id: current_user).sort_by{|commission|commission.contract.terms.max_by{|t|t.created_at}.date_end}
+    @commissions = Commission.where(user_id: current_user)
+  end
+
   private
 
   def commission_params

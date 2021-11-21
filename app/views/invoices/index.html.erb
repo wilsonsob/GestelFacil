@@ -1,33 +1,35 @@
 <div class="container-md mt-5">
   <div class="row justify-content-center">
-    <div class="col-sm-10">
-      <h5 class="text-left"><%= "Detalhes faturamento" %></h5>
+    <div class="col-12">
+      <h5 class="text-left"><%= "Todas as faturas" %></h5>
       <div class="card-body" style="text-align:center;">
         <table class="table table-hover" style="font-size:13px">
             <tr>
               <th class="">Nº fatura</th>
-              <th class="">Código do serviço</th>
-              <th class="">Nome do serviço</th>
-              <th class="">CNPJ do contratante</th>
-              <th class="">Data da Fatura</th>
-              <th class="">Referência</th>
-              <th class="">Valor R$</th>
+              <th class="">Contrato</th>
+              <th class="">Contratada</th>
+              <th class="">Vigência</th>
+              <th class="">Contagem detalhamento</th>
+              <th class="">Observação</th>
+              <th class="">Valor faturado R$</th>
+              <th class="">Status</th>
             </tr>
             <% @invoices.each do |invoice| %>
               <tr>
-                <td class=""><%= invoice.number  %></td>
-                <td class=""><%= invoice.service_code  %></td>
-                <td class=""><%= invoice.service_name  %></td>
-                <td class=""><%= invoice.cnpj_contractor  %></td>
-                <td class=""><%= invoice.date_invoice  %></td>
-                <td class=""><%= "#{invoice.term.date_start} - #{invoice.term.date_end}"   %></td>
-                <td class=""><%= sprintf('%.2f', invoice.value)  %></td>
+                <td class=""><%= link_to "#{invoice.number  %></td>
+                <td class=""><%= invoice.term.contract.number  %></td>
+                <td class=""><%= invoice.term.contract.company  %></td>
+                <td class=""><%= "#{invoice.term.date_start.strftime("%d/%m/%Y")} - #{invoice.term.date_end.strftime("%d/%m/%Y")}"  %></td>
+                <td class=""><%= invoice.details.count  %></td>
+                <td class=""><%= invoice.note   %></td>
+                <td class=""><%= "R$ #{number_to_currency(invoice.details.sum(:value), separator: ',', delimiter: '.', unit: '')}" %></td>
+                <td class=""><%= %></td>
               </tr>
             <% end %>
         </table>
         <br>
         <%= link_to "Página incial", root_path, class:"btn-custom-light" %>
-        <%= link_to "Meus contratos", profile_path, class:"btn-custom-light" %>
+        <%= link_to "Meus contratos", commissions_path, class:"btn-custom-light" %>
       </div>
     </div>
   </div>
